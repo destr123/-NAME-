@@ -318,7 +318,7 @@
       overflow: hidden;
     }
 
-    /* Базовый класс для всех экранов */
+    /* Базовый класс для всех экранов — ПРОЗРАЧНЫЙ ФОН */
     .screen-slide {
       position: absolute;
       top: 0;
@@ -327,7 +327,7 @@
       height: 100%;
       padding: 40px 28px 36px;
       padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-      background: #ffffff;
+      background: transparent; /* ← ГЛАВНОЕ ИЗМЕНЕНИЕ: фон прозрачный */
       transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
       will-change: transform, opacity;
       display: flex;
@@ -410,6 +410,26 @@
       transform: translateX(-100%);
       opacity: 0;
       z-index: 1;
+    }
+
+    /* ===== ДОПОЛНИТЕЛЬНО: БЕЛЫЙ ФОН ДЛЯ КОНТЕНТА, НО НЕ ДЛЯ ВСЕГО ЭКРАНА ===== */
+    /* Поля ввода и кнопки остаются белыми, а фон экрана прозрачным */
+    .input-field,
+    .social-btn,
+    .cta-button {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(2px);
+    }
+
+    /* Чтобы текст читался на фоне папоротников */
+    .main-headline,
+    .sub-headline,
+    .logo,
+    .footer-link,
+    .social-label,
+    .divider,
+    .input-group label {
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6);
     }
 
     /* ===== АДАПТИВНОСТЬ ===== */
@@ -657,13 +677,11 @@
       screenLogin.classList.remove('hidden', 'from-register');
       screenLogin.classList.add('from-register');
 
-      // Через 50ms начинаем анимацию приезда
       setTimeout(() => {
         screenLogin.classList.remove('from-register');
         screenLogin.classList.add('active');
       }, 50);
 
-      // Через 500ms убираем класс у регистрации
       setTimeout(() => {
         screenRegister.classList.remove('to-login');
         screenRegister.className = 'screen-slide register';
