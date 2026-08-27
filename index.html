@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Ты не один</title>
+
+  <!-- Подключение шрифта Inconsolata -->
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
     /* ===== БАЗА ===== */
     * {
@@ -17,7 +21,7 @@
       height: 100%;
       overflow: hidden;
       background: #ffffff;
-      font-family: -apple-system, "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
+      font-family: 'Inconsolata', 'Courier New', monospace;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       touch-action: none;
@@ -41,12 +45,12 @@
       padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
 
-    /* ===== ПАПОРОТНИКИ ===== */
+    /* ===== ПАПОРОТНИКИ (ТОЛЬКО ПО ПРАВОЙ СТОРОНЕ) ===== */
     .fern-bg {
       position: absolute;
       top: 0;
-      left: 0;
-      width: 100%;
+      right: 0;
+      width: 60%;
       height: 100%;
       pointer-events: none;
       z-index: 0;
@@ -55,36 +59,31 @@
 
     .fern {
       position: absolute;
-      opacity: 0.22;
+      opacity: 0.20;
       stroke: #d9d9d9;
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
 
+    /* Папоротник 1 (верхний правый) */
     .fern-1 {
-      top: -6%;
-      right: -14%;
-      width: 82%;
-      height: 70%;
-      transform: rotate(18deg);
+      top: -8%;
+      right: -10%;
+      width: 90%;
+      height: 65%;
+      transform: rotate(12deg);
       opacity: 0.18;
     }
+
+    /* Папоротник 2 (нижний правый) */
     .fern-2 {
-      bottom: -8%;
-      left: -18%;
-      width: 90%;
+      bottom: -10%;
+      right: -8%;
+      width: 85%;
       height: 60%;
-      transform: rotate(-12deg);
+      transform: rotate(-8deg);
       opacity: 0.16;
-    }
-    .fern-3 {
-      top: 28%;
-      left: -12%;
-      width: 50%;
-      height: 40%;
-      transform: rotate(40deg);
-      opacity: 0.13;
     }
 
     /* ===== ОБЩИЕ СТИЛИ ===== */
@@ -104,49 +103,52 @@
       text-align: center;
       margin-bottom: 40px;
       font-size: 20px;
-      font-weight: 650;
+      font-weight: 700;
       letter-spacing: 2px;
       color: #1e1e1e;
       user-select: none;
+      font-family: 'Inconsolata', monospace;
     }
     .logo span { color: #2b7a4b; }
 
     .main-headline {
       font-size: clamp(26px, 6.5vw, 36px);
-      font-weight: 650;
+      font-weight: 700;
       line-height: 1.15;
       letter-spacing: -0.3px;
       color: #1e1e1e;
       margin-bottom: 24px;
+      font-family: 'Inconsolata', monospace;
     }
 
-    /* Жирный заголовок для страниц входа и регистрации */
     .page-title {
       font-size: clamp(26px, 6.5vw, 36px);
-      font-weight: 650;
+      font-weight: 700;
       line-height: 1.15;
       letter-spacing: -0.3px;
       color: #1e1e1e;
       margin-bottom: 24px;
+      font-family: 'Inconsolata', monospace;
     }
 
-    /* Обычный шрифт для "Введи почту" */
     .sub-title {
       font-size: clamp(20px, 5vw, 28px);
-      font-weight: 420;
+      font-weight: 400;
       line-height: 1.2;
       letter-spacing: -0.2px;
       color: #1e1e1e;
       margin-bottom: 20px;
+      font-family: 'Inconsolata', monospace;
     }
 
     .sub-headline {
       font-size: clamp(16px, 4vw, 22px);
-      font-weight: 420;
+      font-weight: 400;
       line-height: 1.4;
       color: #4a4a4a;
       margin-bottom: 48px;
       max-width: 90%;
+      font-family: 'Inconsolata', monospace;
     }
 
     .input-group {
@@ -159,6 +161,7 @@
       color: #1e1e1e;
       margin-bottom: 6px;
       letter-spacing: 0.2px;
+      font-family: 'Inconsolata', monospace;
     }
 
     .input-wrapper { position: relative; }
@@ -167,7 +170,7 @@
       width: 100%;
       padding: 18px 20px;
       font-size: 17px;
-      font-family: inherit;
+      font-family: 'Inconsolata', monospace;
       color: #1e1e1e;
       background: #ffffff;
       border: 1.5px solid #e0e0e0;
@@ -196,6 +199,7 @@
       margin-top: 6px;
       padding-left: 4px;
       animation: shake 0.3s ease;
+      font-family: 'Inconsolata', monospace;
     }
     .error-message.visible { display: block; }
 
@@ -219,7 +223,7 @@
       cursor: pointer;
       transition: background 0.2s ease, transform 0.15s ease;
       box-shadow: 0 6px 24px rgba(43, 122, 75, 0.18);
-      font-family: inherit;
+      font-family: 'Inconsolata', monospace;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
     }
@@ -233,9 +237,10 @@
       text-align: center;
       font-size: 15px;
       color: #4a4a4a;
-      font-weight: 420;
+      font-weight: 400;
       padding-top: 20px;
       letter-spacing: 0.2px;
+      font-family: 'Inconsolata', monospace;
     }
     .footer-link a {
       color: #2b7a4b;
@@ -256,6 +261,7 @@
       font-size: 14px;
       font-weight: 400;
       letter-spacing: 0.5px;
+      font-family: 'Inconsolata', monospace;
     }
     .divider::before,
     .divider::after {
@@ -269,8 +275,9 @@
       font-size: 15px;
       color: #4a4a4a;
       margin-bottom: 16px;
-      font-weight: 420;
+      font-weight: 400;
       letter-spacing: 0.2px;
+      font-family: 'Inconsolata', monospace;
     }
 
     .social-buttons {
@@ -296,7 +303,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      font-family: inherit;
+      font-family: 'Inconsolata', monospace;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
       letter-spacing: 0.3px;
@@ -464,47 +471,36 @@
 <body>
 
 <div class="app-screen">
-  <!-- Фоновые папоротники -->
+  <!-- Фоновые папоротники (только с правой стороны) -->
   <div class="fern-bg" aria-hidden="true">
-    <!-- Папоротник 1 (правый верхний) -->
+    <!-- Папоротник 1 (верхний правый) -->
     <svg class="fern fern-1" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- СТЕБЕЛЬ -->
-      <path d="M280 380 C260 320 230 250 200 190 C180 150 160 110 150 70 C145 50 143 35 145 20" stroke="#d9d9d9" stroke-width="1.8"/>
+      <!-- Стебель -->
+      <path d="M220 380 C200 320 170 250 140 190 C120 150 100 110 90 70 C85 50 83 35 85 20" stroke="#d9d9d9" stroke-width="1.8"/>
       <!-- Листья -->
-      <path d="M200 190 C170 200 140 210 120 220" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M200 190 C230 200 260 210 280 220" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M180 150 C155 160 130 170 110 180" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M180 150 C205 160 230 170 250 180" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M160 110 C140 118 120 125 105 135" stroke="#d9d9d9" stroke-width="1.0"/>
-      <path d="M160 110 C180 118 200 125 215 135" stroke="#d9d9d9" stroke-width="1.0"/>
-      <path d="M150 70 C135 78 120 85 108 95" stroke="#d9d9d9" stroke-width="0.8"/>
-      <path d="M150 70 C165 78 180 85 192 95" stroke="#d9d9d9" stroke-width="0.8"/>
+      <path d="M140 190 C110 200 80 210 60 220" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M140 190 C170 200 200 210 220 220" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M120 150 C95 160 70 170 50 180" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M120 150 C145 160 170 170 190 180" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M100 110 C80 118 60 125 45 135" stroke="#d9d9d9" stroke-width="1.0"/>
+      <path d="M100 110 C120 118 140 125 155 135" stroke="#d9d9d9" stroke-width="1.0"/>
+      <path d="M90 70 C75 78 60 85 48 95" stroke="#d9d9d9" stroke-width="0.8"/>
+      <path d="M90 70 C105 78 120 85 132 95" stroke="#d9d9d9" stroke-width="0.8"/>
     </svg>
 
-    <!-- Папоротник 2 (левый нижний) -->
+    <!-- Папоротник 2 (нижний правый) -->
     <svg class="fern fern-2" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- СТЕБЕЛЬ -->
-      <path d="M20 0 C40 60 80 140 120 200 C145 240 165 270 180 300 C190 320 195 340 195 360" stroke="#d9d9d9" stroke-width="1.8"/>
+      <!-- Стебель -->
+      <path d="M230 20 C210 80 170 160 130 220 C105 260 85 290 70 320 C60 340 55 355 55 370" stroke="#d9d9d9" stroke-width="1.8"/>
       <!-- Листья -->
-      <path d="M120 200 C100 210 80 220 60 230" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M120 200 C140 210 160 220 180 230" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M145 240 C125 250 105 260 85 270" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M145 240 C165 250 185 260 205 270" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M165 270 C148 278 130 285 115 295" stroke="#d9d9d9" stroke-width="1.0"/>
-      <path d="M165 270 C182 278 200 285 215 295" stroke="#d9d9d9" stroke-width="1.0"/>
-    </svg>
-
-    <!-- Папоротник 3 (левый средний) -->
-    <svg class="fern fern-3" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- СТЕБЕЛЬ -->
-      <path d="M10 280 C30 220 60 160 85 110 C100 80 110 50 115 25 C117 15 116 8 112 2" stroke="#d9d9d9" stroke-width="1.5"/>
-      <!-- Листья -->
-      <path d="M85 110 C65 120 45 130 28 140" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M85 110 C105 120 125 130 142 140" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M100 80 C82 88 65 95 50 105" stroke="#d9d9d9" stroke-width="1.0"/>
-      <path d="M100 80 C118 88 135 95 150 105" stroke="#d9d9d9" stroke-width="1.0"/>
-      <path d="M110 50 C95 58 80 65 68 75" stroke="#d9d9d9" stroke-width="0.8"/>
-      <path d="M110 50 C125 58 140 65 152 75" stroke="#d9d9d9" stroke-width="0.8"/>
+      <path d="M130 220 C110 230 90 240 70 250" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M130 220 C150 230 170 240 190 250" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M105 260 C85 270 65 280 45 290" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M105 260 C125 270 145 280 165 290" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M85 290 C68 298 50 305 35 315" stroke="#d9d9d9" stroke-width="1.0"/>
+      <path d="M85 290 C102 298 120 305 135 315" stroke="#d9d9d9" stroke-width="1.0"/>
+      <path d="M70 320 C56 328 42 335 30 345" stroke="#d9d9d9" stroke-width="0.8"/>
+      <path d="M70 320 C84 328 98 335 110 345" stroke="#d9d9d9" stroke-width="0.8"/>
     </svg>
   </div>
 
@@ -845,7 +841,6 @@
     let typeTimeout = null;
 
     function typeEffect(text, element, speed = 45) {
-      // Если уже идёт печать — отменяем
       if (isTyping) {
         clearTimeout(typeTimeout);
         isTyping = false;
@@ -860,14 +855,12 @@
         if (index < text.length) {
           displayed += text.charAt(index);
           element.textContent = displayed;
-          // Добавляем курсор
           const cursor = document.createElement('span');
           cursor.className = 'typewriter-cursor';
           element.appendChild(cursor);
           index++;
           typeTimeout = setTimeout(typeChar, speed);
         } else {
-          // Текст напечатан
           const cursor = document.createElement('span');
           cursor.className = 'typewriter-cursor';
           element.appendChild(cursor);
@@ -878,10 +871,8 @@
       typeChar();
     }
 
-    // Запуск при загрузке
     setTimeout(() => typeEffect(fullText, headline, 50), 300);
 
-    // Клик — перепечатываем заново (только если не идёт печать)
     headline.addEventListener('click', function(e) {
       e.stopPropagation();
       if (!isTyping) {
