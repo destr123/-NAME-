@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Ты не один</title>
   <style>
+    /* ===== БАЗА ===== */
     * {
       margin: 0;
       padding: 0;
@@ -117,6 +118,26 @@
       letter-spacing: -0.3px;
       color: #1e1e1e;
       margin-bottom: 24px;
+    }
+
+    /* Жирный заголовок для страниц входа и регистрации */
+    .page-title {
+      font-size: clamp(26px, 6.5vw, 36px);
+      font-weight: 650;
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+      color: #1e1e1e;
+      margin-bottom: 24px;
+    }
+
+    /* Обычный шрифт для "Введи почту" */
+    .sub-title {
+      font-size: clamp(20px, 5vw, 28px);
+      font-weight: 420;
+      line-height: 1.2;
+      letter-spacing: -0.2px;
+      color: #1e1e1e;
+      margin-bottom: 20px;
     }
 
     .sub-headline {
@@ -403,11 +424,15 @@
       .cta-button { padding: 16px; font-size: 16px; }
       .social-btn { font-size: 13px; padding: 12px 6px; min-width: 60px; }
       .social-btn svg { width: 18px; height: 18px; }
+      .page-title { font-size: 22px; }
+      .sub-title { font-size: 18px; }
     }
 
     @media (max-width: 360px) {
       .screen-slide { padding: 24px 16px 20px; }
       .main-headline { font-size: 22px; }
+      .page-title { font-size: 20px; }
+      .sub-title { font-size: 16px; }
       .input-field { padding: 14px 16px; font-size: 15px; }
       .cta-button { padding: 14px; font-size: 15px; }
       .footer-link { font-size: 13px; }
@@ -441,29 +466,45 @@
 <div class="app-screen">
   <!-- Фоновые папоротники -->
   <div class="fern-bg" aria-hidden="true">
+    <!-- Папоротник 1 (правый верхний) -->
     <svg class="fern fern-1" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M150 20 C120 60 80 120 60 180 C50 210 45 240 50 270 C55 300 70 330 90 350 C110 370 130 380 150 380" stroke="#d9d9d9" stroke-width="1.8"/>
-      <path d="M150 20 C180 60 220 120 240 180 C250 210 255 240 250 270 C245 300 230 330 210 350 C190 370 170 380 150 380" stroke="#d9d9d9" stroke-width="1.8"/>
-      <path d="M150 40 C130 80 100 130 85 180 C78 210 75 240 80 270" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M150 40 C170 80 200 130 215 180 C222 210 225 240 220 270" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M150 60 C140 100 125 150 120 200 C118 220 118 240 122 260" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M150 60 C160 100 175 150 180 200 C182 220 182 240 178 260" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M85 180 C75 200 68 220 65 240" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M215 180 C225 200 232 220 235 240" stroke="#d9d9d9" stroke-width="1.2"/>
+      <!-- СТЕБЕЛЬ -->
+      <path d="M280 380 C260 320 230 250 200 190 C180 150 160 110 150 70 C145 50 143 35 145 20" stroke="#d9d9d9" stroke-width="1.8"/>
+      <!-- Листья -->
+      <path d="M200 190 C170 200 140 210 120 220" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M200 190 C230 200 260 210 280 220" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M180 150 C155 160 130 170 110 180" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M180 150 C205 160 230 170 250 180" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M160 110 C140 118 120 125 105 135" stroke="#d9d9d9" stroke-width="1.0"/>
+      <path d="M160 110 C180 118 200 125 215 135" stroke="#d9d9d9" stroke-width="1.0"/>
+      <path d="M150 70 C135 78 120 85 108 95" stroke="#d9d9d9" stroke-width="0.8"/>
+      <path d="M150 70 C165 78 180 85 192 95" stroke="#d9d9d9" stroke-width="0.8"/>
     </svg>
+
+    <!-- Папоротник 2 (левый нижний) -->
     <svg class="fern fern-2" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M30 380 C60 340 100 280 140 220 C160 190 175 160 185 130 C195 100 200 70 195 40 C190 20 180 10 170 5" stroke="#d9d9d9" stroke-width="1.8"/>
-      <path d="M30 380 C0 340 -40 280 -80 220 C-100 190 -115 160 -125 130 C-135 100 -140 70 -135 40 C-130 20 -120 10 -110 5" stroke="#d9d9d9" stroke-width="1.8"/>
-      <path d="M50 360 C70 320 100 270 130 220 C145 195 155 170 162 145" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M10 360 C-10 320 -40 270 -70 220 C-85 195 -95 170 -102 145" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M70 340 C90 300 115 255 140 210 C150 190 158 170 163 150" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M-10 340 C-30 300 -55 255 -80 210 C-90 190 -98 170 -103 150" stroke="#d9d9d9" stroke-width="1.2"/>
+      <!-- СТЕБЕЛЬ -->
+      <path d="M20 0 C40 60 80 140 120 200 C145 240 165 270 180 300 C190 320 195 340 195 360" stroke="#d9d9d9" stroke-width="1.8"/>
+      <!-- Листья -->
+      <path d="M120 200 C100 210 80 220 60 230" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M120 200 C140 210 160 220 180 230" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M145 240 C125 250 105 260 85 270" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M145 240 C165 250 185 260 205 270" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M165 270 C148 278 130 285 115 295" stroke="#d9d9d9" stroke-width="1.0"/>
+      <path d="M165 270 C182 278 200 285 215 295" stroke="#d9d9d9" stroke-width="1.0"/>
     </svg>
+
+    <!-- Папоротник 3 (левый средний) -->
     <svg class="fern fern-3" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 280 C40 240 80 180 110 120 C125 90 135 60 138 30 C139 15 135 5 130 0" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M20 280 C0 240 -40 180 -70 120 C-85 90 -95 60 -98 30 C-99 15 -95 5 -90 0" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M30 260 C50 220 80 170 105 120 C115 100 122 80 125 60" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M10 260 C-10 220 -40 170 -65 120 C-75 100 -82 80 -85 60" stroke="#d9d9d9" stroke-width="1.2"/>
+      <!-- СТЕБЕЛЬ -->
+      <path d="M10 280 C30 220 60 160 85 110 C100 80 110 50 115 25 C117 15 116 8 112 2" stroke="#d9d9d9" stroke-width="1.5"/>
+      <!-- Листья -->
+      <path d="M85 110 C65 120 45 130 28 140" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M85 110 C105 120 125 130 142 140" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M100 80 C82 88 65 95 50 105" stroke="#d9d9d9" stroke-width="1.0"/>
+      <path d="M100 80 C118 88 135 95 150 105" stroke="#d9d9d9" stroke-width="1.0"/>
+      <path d="M110 50 C95 58 80 65 68 75" stroke="#d9d9d9" stroke-width="0.8"/>
+      <path d="M110 50 C125 58 140 65 152 75" stroke="#d9d9d9" stroke-width="0.8"/>
     </svg>
   </div>
 
@@ -493,7 +534,9 @@
       <div class="content">
         <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
 
-        <h1 class="main-headline">Введи почту</h1>
+        <h1 class="page-title">Вход</h1>
+
+        <p class="sub-title">Введи почту</p>
 
         <div class="input-group">
           <div class="input-wrapper">
@@ -532,7 +575,9 @@
       <div class="content">
         <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
 
-        <h1 class="main-headline">Введи почту</h1>
+        <h1 class="page-title">Регистрация</h1>
+
+        <p class="sub-title">Введи почту</p>
 
         <div class="input-group">
           <div class="input-wrapper">
@@ -595,7 +640,7 @@
     const loginEmailErr = document.getElementById('loginEmailError');
 
     // ===== СОСТОЯНИЕ =====
-    let currentScreen = 'first'; // 'first', 'login', 'register'
+    let currentScreen = 'first';
 
     // ===== ОЧИСТКА КЛАССОВ =====
     function resetClasses() {
@@ -607,36 +652,23 @@
     // ===== ПЕРЕХОД: FIRST → LOGIN (ВЕРТИКАЛЬНЫЙ) =====
     function goToLoginFromFirst() {
       resetClasses();
-
-      // Первый уезжает вверх
       screenFirst.classList.add('hidden');
-
-      // Вход выезжает снизу
       screenLogin.classList.add('active');
-
       currentScreen = 'login';
     }
 
     // ===== ПЕРЕХОД: FIRST → REGISTER (ВЕРТИКАЛЬНЫЙ) =====
     function goToRegisterFromFirst() {
       resetClasses();
-
-      // Первый уезжает вверх
       screenFirst.classList.add('hidden');
-
-      // Регистрация выезжает снизу
       screenRegister.classList.add('active');
-
       currentScreen = 'register';
     }
 
     // ===== ПЕРЕХОД: LOGIN ↔ REGISTER (ГОРИЗОНТАЛЬНЫЙ) =====
     function goToLoginFromRegister() {
-      // Регистрация уезжает влево
       screenRegister.classList.remove('active');
       screenRegister.classList.add('to-login');
-
-      // Вход приезжает справа
       screenLogin.classList.remove('hidden', 'from-register');
       screenLogin.classList.add('from-register');
 
@@ -654,11 +686,8 @@
     }
 
     function goToRegisterFromLogin() {
-      // Вход уезжает вправо
       screenLogin.classList.remove('active');
       screenLogin.classList.add('to-register');
-
-      // Регистрация приезжает слева
       screenRegister.classList.remove('hidden', 'from-login');
       screenRegister.classList.add('from-login');
 
@@ -676,13 +705,10 @@
     }
 
     // ===== ОБРАБОТЧИКИ =====
-
-    // Кнопка "РАССКАЗАТЬ!" → на логин
     firstCta.addEventListener('click', function() {
       goToLoginFromFirst();
     });
 
-    // "зарегистрироваться" на логине → регистрация (горизонтально)
     toRegister.addEventListener('click', function(e) {
       e.preventDefault();
       if (currentScreen === 'login') {
@@ -692,7 +718,6 @@
       }
     });
 
-    // "войти" на регистрации → логин (горизонтально)
     toLogin.addEventListener('click', function(e) {
       e.preventDefault();
       if (currentScreen === 'register') {
@@ -813,38 +838,55 @@
       });
     });
 
-    // ===== ТИПОГРАФСКИЙ ЭФФЕКТ =====
+    // ===== ТИПОГРАФСКИЙ ЭФФЕКТ (С ФИКСОМ) =====
     const headline = document.getElementById('headline');
     const fullText = 'Иногда тебя понимает только тот, кто чувствует то же самое';
+    let isTyping = false;
+    let typeTimeout = null;
 
     function typeEffect(text, element, speed = 45) {
+      // Если уже идёт печать — отменяем
+      if (isTyping) {
+        clearTimeout(typeTimeout);
+        isTyping = false;
+      }
+
       let index = 0;
       let displayed = '';
       element.textContent = '';
+      isTyping = true;
 
       function typeChar() {
         if (index < text.length) {
           displayed += text.charAt(index);
           element.textContent = displayed;
+          // Добавляем курсор
           const cursor = document.createElement('span');
           cursor.className = 'typewriter-cursor';
           element.appendChild(cursor);
           index++;
-          setTimeout(typeChar, speed);
+          typeTimeout = setTimeout(typeChar, speed);
         } else {
+          // Текст напечатан
           const cursor = document.createElement('span');
           cursor.className = 'typewriter-cursor';
           element.appendChild(cursor);
+          isTyping = false;
         }
       }
+
       typeChar();
     }
 
+    // Запуск при загрузке
     setTimeout(() => typeEffect(fullText, headline, 50), 300);
 
+    // Клик — перепечатываем заново (только если не идёт печать)
     headline.addEventListener('click', function(e) {
       e.stopPropagation();
-      typeEffect(fullText, this, 40);
+      if (!isTyping) {
+        typeEffect(fullText, this, 40);
+      }
     });
 
     // ===== БЛОКИРОВКА СКРОЛЛА =====
