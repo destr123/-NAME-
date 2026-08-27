@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Добро пожаловать — Ты не один</title>
+  <title>Расскажи о себе — Ты не один</title>
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet" />
   <style>
     * {
@@ -38,13 +38,274 @@
       background: #ffffff;
       overflow: hidden;
       display: flex;
+      flex-direction: column;
+      padding: 40px 28px 36px;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== ПАПОРОТНИКИ ===== */
+    .fern-bg {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 70%;
+      height: 70%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .fern {
+      position: absolute;
+      stroke: #e5e7e5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .fern-1 {
+      bottom: 0%;
+      right: 0%;
+      width: 55%;
+      height: 60%;
+      transform: rotate(-4deg);
+      opacity: 0.45;
+    }
+
+    .fern-2 {
+      bottom: 0%;
+      right: -2%;
+      width: 38%;
+      height: 45%;
+      transform: rotate(8deg);
+      opacity: 0.35;
+    }
+
+    /* ===== КОНТЕНТ ===== */
+    .content {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+      padding-bottom: 4%;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #1e1e1e;
+      user-select: none;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 700;
+    }
+    .logo span { color: #2b7a4b; }
+
+    .main-headline {
+      font-size: clamp(28px, 7vw, 38px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      color: #1e1e1e;
+      margin-bottom: 8px;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 700;
+    }
+
+    .sub-headline {
+      font-size: clamp(18px, 4vw, 24px);
+      font-weight: 400;
+      color: #4a4a4a;
+      margin-bottom: 20px;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 400;
+    }
+
+    /* ===== ТЕКСТОВОЕ ПОЛЕ ===== */
+    .textarea-group {
+      margin-bottom: 16px;
+    }
+
+    .textarea-field {
+      width: 100%;
+      min-height: 120px;
+      padding: 18px 20px;
+      font-size: 17px;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 400;
+      color: #1e1e1e;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(4px);
+      border: 1.5px solid #e0e0e0;
+      border-radius: 16px;
+      outline: none;
+      resize: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .textarea-field:focus {
+      border-color: #2b7a4b;
+      box-shadow: 0 0 0 3px rgba(43, 122, 75, 0.08);
+    }
+
+    .textarea-field::placeholder {
+      color: #b0b0b0;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+
+    /* ===== КНОПКА СОСТОЯНИЙ ===== */
+    .mood-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(4px);
+      border: 1.5px solid #e0e0e0;
+      border-radius: 60px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: #1e1e1e;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      margin-bottom: 16px;
+    }
+
+    .mood-toggle:hover {
+      border-color: #b0b0b0;
+    }
+
+    .mood-toggle:active {
+      transform: scale(0.96);
+    }
+
+    .mood-toggle.active {
+      border-color: #2b7a4b;
+      background: rgba(43, 122, 75, 0.06);
+    }
+
+    .mood-toggle .icon {
+      font-size: 18px;
+    }
+
+    /* ===== ПАНЕЛЬ СОСТОЯНИЙ ===== */
+    .mood-panel {
+      display: none;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 16px;
+      background: rgba(245, 245, 245, 0.6);
+      border-radius: 16px;
+      backdrop-filter: blur(4px);
+    }
+
+    .mood-panel.open {
+      display: flex;
+    }
+
+    .mood-panel .label {
+      width: 100%;
+      font-size: 14px;
+      color: #4a4a4a;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 400;
+      margin-bottom: 4px;
+    }
+
+    .mood-chip {
+      padding: 8px 14px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 60px;
+      font-family: 'Inconsolata', monospace;
+      font-size: 14px;
+      font-weight: 400;
+      color: #1e1e1e;
+      background: rgba(255, 255, 255, 0.8);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      user-select: none;
+    }
+
+    .mood-chip:active {
+      transform: scale(0.95);
+    }
+
+    .mood-chip.selected {
+      border-color: #2b7a4b;
+      background: rgba(43, 122, 75, 0.08);
+      box-shadow: 0 0 0 2px rgba(43, 122, 75, 0.1);
+    }
+
+    /* ===== КНОПКА ===== */
+    .cta-button {
+      width: 100%;
+      max-width: 360px;
+      padding: 18px;
+      margin-top: 4px;
+      background: #2b7a4b;
+      color: #ffffff;
+      border: none;
+      border-radius: 60px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+      box-shadow: 0 6px 24px rgba(43, 122, 75, 0.18);
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 600;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .cta-button:active {
+      transform: scale(0.96);
+      background: #1d5c34;
+    }
+
+    /* ===== WELCOME OVERLAY ===== */
+    .welcome-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      display: none;
       align-items: center;
       justify-content: center;
       opacity: 0;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.5s ease;
     }
 
-    .app-screen.show {
+    .welcome-overlay.show {
+      display: flex;
+    }
+
+    .welcome-overlay.visible {
       opacity: 1;
     }
 
@@ -60,23 +321,40 @@
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
-    .welcome-text.visible {
+    .welcome-text.show {
       opacity: 1;
       transform: scale(1);
     }
 
-    /* desktop */
+    /* ===== АДАПТИВНОСТЬ ===== */
+    @media (max-width: 420px) {
+      .app-screen { padding: 32px 20px 28px; }
+      .logo { font-size: 17px; margin-bottom: 16px; }
+      .cta-button { padding: 16px; font-size: 16px; }
+      .textarea-field { min-height: 100px; font-size: 16px; padding: 16px 18px; }
+      .mood-chip { font-size: 12px; padding: 6px 12px; }
+    }
+
+    @media (max-width: 360px) {
+      .app-screen { padding: 24px 16px 20px; }
+      .main-headline { font-size: 24px; }
+      .sub-headline { font-size: 16px; }
+      .cta-button { padding: 14px; font-size: 15px; }
+      .textarea-field { min-height: 80px; font-size: 15px; }
+    }
+
     @media (min-width: 600px) {
+      .app-screen {
+        max-width: 480px;
+        margin: 0 auto;
+        border-radius: 0;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.06);
+      }
       body {
         background: #f5f5f7;
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-      .app-screen {
-        max-width: 480px;
-        border-radius: 0;
-        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.06);
       }
     }
   </style>
@@ -84,38 +362,155 @@
 <body>
 
 <div class="app-screen" id="appScreen">
-  <div class="welcome-text" id="welcomeText">Добро пожаловать</div>
+
+  <!-- Папоротники -->
+  <div class="fern-bg" aria-hidden="true">
+    <svg class="fern fern-1" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M380 390 C350 340 300 270 250 210 C210 160 175 120 155 85 C145 68 138 55 135 42" stroke="#e5e7e5" stroke-width="2.2"/>
+      <path d="M300 270 C280 280 260 290 245 300" stroke="#e5e7e5" stroke-width="1.6"/>
+      <path d="M300 270 C320 280 340 290 355 300" stroke="#e5e7e5" stroke-width="1.6"/>
+      <path d="M260 220 C242 228 225 235 212 245" stroke="#e5e7e5" stroke-width="1.4"/>
+      <path d="M260 220 C278 228 295 235 308 245" stroke="#e5e7e5" stroke-width="1.4"/>
+      <path d="M225 175 C210 182 195 188 185 198" stroke="#e5e7e5" stroke-width="1.2"/>
+      <path d="M225 175 C240 182 255 188 265 198" stroke="#e5e7e5" stroke-width="1.2"/>
+      <path d="M195 140 C183 146 172 152 165 162" stroke="#e5e7e5" stroke-width="1.0"/>
+      <path d="M195 140 C207 146 218 152 225 162" stroke="#e5e7e5" stroke-width="1.0"/>
+      <path d="M170 110 C160 115 152 120 148 128" stroke="#e5e7e5" stroke-width="0.9"/>
+      <path d="M170 110 C180 115 188 120 192 128" stroke="#e5e7e5" stroke-width="0.9"/>
+      <path d="M135 42 C125 48 118 52 115 58" stroke="#e5e7e5" stroke-width="0.8"/>
+      <path d="M135 42 C145 48 152 52 155 58" stroke="#e5e7e5" stroke-width="0.8"/>
+    </svg>
+
+    <svg class="fern fern-2" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M280 290 C260 250 230 200 200 160 C178 130 160 105 150 85 C145 75 142 68 140 60" stroke="#e5e7e5" stroke-width="2.0"/>
+      <path d="M230 200 C215 208 200 215 190 225" stroke="#e5e7e5" stroke-width="1.4"/>
+      <path d="M230 200 C245 208 260 215 270 225" stroke="#e5e7e5" stroke-width="1.4"/>
+      <path d="M200 160 C188 168 175 175 168 185" stroke="#e5e7e5" stroke-width="1.2"/>
+      <path d="M200 160 C212 168 225 175 232 185" stroke="#e5e7e5" stroke-width="1.2"/>
+      <path d="M170 130 C160 136 152 142 148 150" stroke="#e5e7e5" stroke-width="1.0"/>
+      <path d="M170 130 C180 136 188 142 192 150" stroke="#e5e7e5" stroke-width="1.0"/>
+      <path d="M150 105 C142 110 136 115 133 122" stroke="#e5e7e5" stroke-width="0.8"/>
+      <path d="M150 105 C158 110 164 115 167 122" stroke="#e5e7e5" stroke-width="0.8"/>
+    </svg>
+  </div>
+
+  <!-- WELCOME OVERLAY -->
+  <div class="welcome-overlay" id="welcomeOverlay">
+    <div class="welcome-text" id="welcomeText">Добро пожаловать</div>
+  </div>
+
+  <!-- ===== КОНТЕНТ ===== -->
+  <div class="content">
+
+    <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
+
+    <h1 class="main-headline">ТЕПЕРЬ САМОЕ ВАЖНОЕ!</h1>
+    <p class="sub-headline">Расскажи о себе</p>
+
+    <!-- Текстовое поле -->
+    <div class="textarea-group">
+      <textarea class="textarea-field" id="aboutText" placeholder="Что сейчас происходит с тобой?"></textarea>
+    </div>
+
+    <!-- Кнопка открытия состояний -->
+    <button class="mood-toggle" id="moodToggle">
+      <span class="icon">❤️</span>
+      Как ты себя чувствуешь?
+    </button>
+
+    <!-- Панель состояний -->
+    <div class="mood-panel" id="moodPanel">
+      <span class="label">Выбери свои состояния:</span>
+      <div class="mood-chip" data-mood="😔 Одиноко">😔 Одиноко</div>
+      <div class="mood-chip" data-mood="😰 Тревожно">😰 Тревожно</div>
+      <div class="mood-chip" data-mood="😡 Злюсь">😡 Злюсь</div>
+      <div class="mood-chip" data-mood="🫥 Потерян">🫥 Потерян</div>
+      <div class="mood-chip" data-mood="💔 Разбит">💔 Разбит</div>
+      <div class="mood-chip" data-mood="🥱 Нет сил">🥱 Нет сил</div>
+      <div class="mood-chip" data-mood="😄 Хорошо">😄 Хорошо</div>
+      <div class="mood-chip" data-mood="🫂 Хочу поговорить">🫂 Хочу поговорить</div>
+    </div>
+
+    <button class="cta-button" id="doneBtn">ГОТОВО</button>
+
+  </div>
 </div>
 
 <script>
   (function() {
     const appScreen = document.getElementById('appScreen');
+    const aboutText = document.getElementById('aboutText');
+    const moodToggle = document.getElementById('moodToggle');
+    const moodPanel = document.getElementById('moodPanel');
+    const moodChips = document.querySelectorAll('.mood-chip');
+    const doneBtn = document.getElementById('doneBtn');
+    const welcomeOverlay = document.getElementById('welcomeOverlay');
     const welcomeText = document.getElementById('welcomeText');
 
-    // Появление
+    let selectedMoods = [];
+
+    // ===== АНИМАЦИЯ ВХОДА =====
     setTimeout(() => {
-      appScreen.classList.add('show');
+      appScreen.style.opacity = '1';
+      appScreen.style.transform = 'translateY(0)';
     }, 50);
 
-    setTimeout(() => {
-      welcomeText.classList.add('visible');
-    }, 300);
+    // ===== TOGGLE ПАНЕЛИ =====
+    moodToggle.addEventListener('click', function() {
+      moodPanel.classList.toggle('open');
+      this.classList.toggle('active');
+    });
 
-    // Исчезновение
-    setTimeout(() => {
-      welcomeText.classList.remove('visible');
-    }, 1800);
+    // ===== ВЫБОР СОСТОЯНИЙ =====
+    moodChips.forEach(chip => {
+      chip.addEventListener('click', function() {
+        this.classList.toggle('selected');
+        const mood = this.dataset.mood;
+        if (this.classList.contains('selected')) {
+          if (!selectedMoods.includes(mood)) {
+            selectedMoods.push(mood);
+          }
+        } else {
+          selectedMoods = selectedMoods.filter(m => m !== mood);
+        }
+      });
+    });
 
-    setTimeout(() => {
-      appScreen.classList.remove('show');
-    }, 2200);
+    // ===== КНОПКА "ГОТОВО" =====
+    doneBtn.addEventListener('click', function(e) {
+      e.preventDefault();
 
-    // Переход на /home
-    setTimeout(() => {
-      window.location.href = 'https://destr123.github.io/demo-site/home';
-    }, 2500);
+      const text = aboutText.value.trim();
 
-    // Блокировка скролла
+      // Сохраняем данные
+      sessionStorage.setItem('aboutText', text);
+      sessionStorage.setItem('moods', JSON.stringify(selectedMoods));
+
+      // Показываем welcome
+      welcomeOverlay.classList.add('show');
+      setTimeout(() => {
+        welcomeOverlay.classList.add('visible');
+      }, 50);
+
+      setTimeout(() => {
+        welcomeText.classList.add('show');
+      }, 300);
+
+      // Исчезаем и переходим
+      setTimeout(() => {
+        welcomeText.classList.remove('show');
+      }, 1500);
+
+      setTimeout(() => {
+        welcomeOverlay.classList.remove('visible');
+        setTimeout(() => {
+          welcomeOverlay.classList.remove('show');
+          window.location.href = 'https://destr123.github.io/-NAME-/home';
+        }, 400);
+      }, 2000);
+    });
+
+    // ===== БЛОКИРОВКА =====
     document.addEventListener('gesturestart', e => e.preventDefault());
 
   })();
