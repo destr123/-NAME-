@@ -50,13 +50,13 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ===== ПАПОРОТНИКИ ===== */
+    /* ===== ПАПОРОТНИКИ (ТОЧНО КАК В REG.HTML) ===== */
     .fern-bg {
       position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 70%;
-      height: 70%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
@@ -64,28 +64,38 @@
 
     .fern {
       position: absolute;
-      stroke: #e5e7e5;
+      opacity: 0.22;
+      stroke: #d9d9d9;
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
 
     .fern-1 {
-      bottom: 0%;
-      right: 0%;
-      width: 55%;
-      height: 60%;
-      transform: rotate(-4deg);
-      opacity: 0.45;
+      top: -6%;
+      right: -14%;
+      width: 82%;
+      height: 70%;
+      transform: rotate(18deg);
+      opacity: 0.18;
     }
 
     .fern-2 {
-      bottom: 0%;
-      right: -2%;
-      width: 38%;
-      height: 45%;
-      transform: rotate(8deg);
-      opacity: 0.35;
+      bottom: -8%;
+      left: -18%;
+      width: 90%;
+      height: 60%;
+      transform: rotate(-12deg);
+      opacity: 0.16;
+    }
+
+    .fern-3 {
+      top: 28%;
+      left: -12%;
+      width: 50%;
+      height: 40%;
+      transform: rotate(40deg);
+      opacity: 0.13;
     }
 
     /* ===== КОНТЕНТ ===== */
@@ -146,8 +156,7 @@
       font-family: 'Inconsolata', monospace;
       font-variation-settings: 'wght' 400;
       color: #1e1e1e;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(4px);
+      background: #ffffff;
       border: 1.5px solid #e0e0e0;
       border-radius: 16px;
       outline: none;
@@ -174,8 +183,7 @@
       align-items: center;
       gap: 8px;
       padding: 10px 18px;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(4px);
+      background: #ffffff;
       border: 1.5px solid #e0e0e0;
       border-radius: 60px;
       font-family: 'Inconsolata', monospace;
@@ -215,7 +223,6 @@
       padding: 16px;
       background: rgba(245, 245, 245, 0.6);
       border-radius: 16px;
-      backdrop-filter: blur(4px);
     }
 
     .mood-panel.open {
@@ -239,7 +246,7 @@
       font-size: 14px;
       font-weight: 400;
       color: #1e1e1e;
-      background: rgba(255, 255, 255, 0.8);
+      background: #ffffff;
       cursor: pointer;
       transition: all 0.2s ease;
       -webkit-tap-highlight-color: transparent;
@@ -271,7 +278,7 @@
       font-weight: 600;
       letter-spacing: 0.6px;
       cursor: pointer;
-      transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+      transition: background 0.2s ease, transform 0.15s ease;
       box-shadow: 0 6px 24px rgba(43, 122, 75, 0.18);
       font-family: 'Inconsolata', monospace;
       font-variation-settings: 'wght' 600;
@@ -284,53 +291,11 @@
       background: #1d5c34;
     }
 
-    /* ===== WELCOME OVERLAY ===== */
-    .welcome-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(12px);
-      z-index: 100;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .welcome-overlay.show {
-      display: flex;
-    }
-
-    .welcome-overlay.visible {
-      opacity: 1;
-    }
-
-    .welcome-text {
-      font-size: clamp(36px, 10vw, 56px);
-      font-weight: 700;
-      color: #1e1e1e;
-      font-family: 'Inconsolata', monospace;
-      font-variation-settings: 'wght' 700;
-      letter-spacing: 2px;
-      opacity: 0;
-      transform: scale(0.96);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .welcome-text.show {
-      opacity: 1;
-      transform: scale(1);
-    }
-
     /* ===== АДАПТИВНОСТЬ ===== */
     @media (max-width: 420px) {
       .app-screen { padding: 32px 20px 28px; }
       .logo { font-size: 17px; margin-bottom: 16px; }
-      .cta-button { padding: 16px; font-size: 16px; }
+      .cta-button { padding: 16px; font-size: 16px; max-width: 100%; }
       .textarea-field { min-height: 100px; font-size: 16px; padding: 16px 18px; }
       .mood-chip { font-size: 12px; padding: 6px 12px; }
     }
@@ -363,40 +328,34 @@
 
 <div class="app-screen" id="appScreen">
 
-  <!-- Папоротники -->
+  <!-- Фоновые папоротники (ТОЧНО КАК В REG.HTML) -->
   <div class="fern-bg" aria-hidden="true">
-    <svg class="fern fern-1" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M380 390 C350 340 300 270 250 210 C210 160 175 120 155 85 C145 68 138 55 135 42" stroke="#e5e7e5" stroke-width="2.2"/>
-      <path d="M300 270 C280 280 260 290 245 300" stroke="#e5e7e5" stroke-width="1.6"/>
-      <path d="M300 270 C320 280 340 290 355 300" stroke="#e5e7e5" stroke-width="1.6"/>
-      <path d="M260 220 C242 228 225 235 212 245" stroke="#e5e7e5" stroke-width="1.4"/>
-      <path d="M260 220 C278 228 295 235 308 245" stroke="#e5e7e5" stroke-width="1.4"/>
-      <path d="M225 175 C210 182 195 188 185 198" stroke="#e5e7e5" stroke-width="1.2"/>
-      <path d="M225 175 C240 182 255 188 265 198" stroke="#e5e7e5" stroke-width="1.2"/>
-      <path d="M195 140 C183 146 172 152 165 162" stroke="#e5e7e5" stroke-width="1.0"/>
-      <path d="M195 140 C207 146 218 152 225 162" stroke="#e5e7e5" stroke-width="1.0"/>
-      <path d="M170 110 C160 115 152 120 148 128" stroke="#e5e7e5" stroke-width="0.9"/>
-      <path d="M170 110 C180 115 188 120 192 128" stroke="#e5e7e5" stroke-width="0.9"/>
-      <path d="M135 42 C125 48 118 52 115 58" stroke="#e5e7e5" stroke-width="0.8"/>
-      <path d="M135 42 C145 48 152 52 155 58" stroke="#e5e7e5" stroke-width="0.8"/>
+    <svg class="fern fern-1" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M150 20 C120 60 80 120 60 180 C50 210 45 240 50 270 C55 300 70 330 90 350 C110 370 130 380 150 380" stroke="#d9d9d9" stroke-width="1.8"/>
+      <path d="M150 20 C180 60 220 120 240 180 C250 210 255 240 250 270 C245 300 230 330 210 350 C190 370 170 380 150 380" stroke="#d9d9d9" stroke-width="1.8"/>
+      <path d="M150 40 C130 80 100 130 85 180 C78 210 75 240 80 270" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M150 40 C170 80 200 130 215 180 C222 210 225 240 220 270" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M150 60 C140 100 125 150 120 200 C118 220 118 240 122 260" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M150 60 C160 100 175 150 180 200 C182 220 182 240 178 260" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M85 180 C75 200 68 220 65 240" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M215 180 C225 200 232 220 235 240" stroke="#d9d9d9" stroke-width="1.2"/>
     </svg>
 
-    <svg class="fern fern-2" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M280 290 C260 250 230 200 200 160 C178 130 160 105 150 85 C145 75 142 68 140 60" stroke="#e5e7e5" stroke-width="2.0"/>
-      <path d="M230 200 C215 208 200 215 190 225" stroke="#e5e7e5" stroke-width="1.4"/>
-      <path d="M230 200 C245 208 260 215 270 225" stroke="#e5e7e5" stroke-width="1.4"/>
-      <path d="M200 160 C188 168 175 175 168 185" stroke="#e5e7e5" stroke-width="1.2"/>
-      <path d="M200 160 C212 168 225 175 232 185" stroke="#e5e7e5" stroke-width="1.2"/>
-      <path d="M170 130 C160 136 152 142 148 150" stroke="#e5e7e5" stroke-width="1.0"/>
-      <path d="M170 130 C180 136 188 142 192 150" stroke="#e5e7e5" stroke-width="1.0"/>
-      <path d="M150 105 C142 110 136 115 133 122" stroke="#e5e7e5" stroke-width="0.8"/>
-      <path d="M150 105 C158 110 164 115 167 122" stroke="#e5e7e5" stroke-width="0.8"/>
+    <svg class="fern fern-2" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 380 C60 340 100 280 140 220 C160 190 175 160 185 130 C195 100 200 70 195 40 C190 20 180 10 170 5" stroke="#d9d9d9" stroke-width="1.8"/>
+      <path d="M30 380 C0 340 -40 280 -80 220 C-100 190 -115 160 -125 130 C-135 100 -140 70 -135 40 C-130 20 -120 10 -110 5" stroke="#d9d9d9" stroke-width="1.8"/>
+      <path d="M50 360 C70 320 100 270 130 220 C145 195 155 170 162 145" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M10 360 C-10 320 -40 270 -70 220 C-85 195 -95 170 -102 145" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M70 340 C90 300 115 255 140 210 C150 190 158 170 163 150" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M-10 340 C-30 300 -55 255 -80 210 C-90 190 -98 170 -103 150" stroke="#d9d9d9" stroke-width="1.2"/>
     </svg>
-  </div>
 
-  <!-- WELCOME OVERLAY -->
-  <div class="welcome-overlay" id="welcomeOverlay">
-    <div class="welcome-text" id="welcomeText">Добро пожаловать</div>
+    <svg class="fern fern-3" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 280 C40 240 80 180 110 120 C125 90 135 60 138 30 C139 15 135 5 130 0" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M20 280 C0 240 -40 180 -70 120 C-85 90 -95 60 -98 30 C-99 15 -95 5 -90 0" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M30 260 C50 220 80 170 105 120 C115 100 122 80 125 60" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M10 260 C-10 220 -40 170 -65 120 C-75 100 -82 80 -85 60" stroke="#d9d9d9" stroke-width="1.2"/>
+    </svg>
   </div>
 
   <!-- ===== КОНТЕНТ ===== -->
@@ -444,12 +403,10 @@
     const moodPanel = document.getElementById('moodPanel');
     const moodChips = document.querySelectorAll('.mood-chip');
     const doneBtn = document.getElementById('doneBtn');
-    const welcomeOverlay = document.getElementById('welcomeOverlay');
-    const welcomeText = document.getElementById('welcomeText');
 
     let selectedMoods = [];
 
-    // ===== АНИМАЦИЯ ВХОДА =====
+    // ===== АНИМАЦИЯ =====
     setTimeout(() => {
       appScreen.style.opacity = '1';
       appScreen.style.transform = 'translateY(0)';
@@ -486,28 +443,14 @@
       sessionStorage.setItem('aboutText', text);
       sessionStorage.setItem('moods', JSON.stringify(selectedMoods));
 
-      // Показываем welcome
-      welcomeOverlay.classList.add('show');
-      setTimeout(() => {
-        welcomeOverlay.classList.add('visible');
-      }, 50);
+      // Переход на welcome (отдельный экран)
+      appScreen.style.opacity = '0';
+      appScreen.style.transform = 'translateY(-8px)';
+      appScreen.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
 
       setTimeout(() => {
-        welcomeText.classList.add('show');
-      }, 300);
-
-      // Исчезаем и переходим
-      setTimeout(() => {
-        welcomeText.classList.remove('show');
-      }, 1500);
-
-      setTimeout(() => {
-        welcomeOverlay.classList.remove('visible');
-        setTimeout(() => {
-          welcomeOverlay.classList.remove('show');
-          window.location.href = 'https://destr123.github.io/-NAME-/home';
-        }, 400);
-      }, 2000);
+        window.location.href = 'https://destr123.github.io/-NAME-/welcome';
+      }, 350);
     });
 
     // ===== БЛОКИРОВКА =====
