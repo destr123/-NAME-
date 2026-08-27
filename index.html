@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Ты не один</title>
   <style>
-    /* ===== БАЗА ===== */
     * {
       margin: 0;
       padding: 0;
@@ -318,7 +317,6 @@
       overflow: hidden;
     }
 
-    /* Базовый класс для всех экранов — ПРОЗРАЧНЫЙ ФОН */
     .screen-slide {
       position: absolute;
       top: 0;
@@ -327,7 +325,7 @@
       height: 100%;
       padding: 40px 28px 36px;
       padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-      background: transparent; /* ← ГЛАВНОЕ ИЗМЕНЕНИЕ: фон прозрачный */
+      background: transparent;
       transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
       will-change: transform, opacity;
       display: flex;
@@ -337,16 +335,12 @@
       z-index: 1;
     }
 
-    /* ===== ПОЗИЦИИ ПО УМОЛЧАНИЮ ===== */
-
-    /* Первый экран — всегда виден, пока не скроется */
     .screen-slide.first {
       transform: translateY(0);
       opacity: 1;
       z-index: 2;
     }
 
-    /* Вход и регистрация — скрыты снизу */
     .screen-slide.login {
       transform: translateY(100%);
       opacity: 0;
@@ -359,77 +353,46 @@
       z-index: 1;
     }
 
-    /* ===== АКТИВНЫЕ СОСТОЯНИЯ ===== */
-
-    /* Вход активен — выехал снизу */
     .screen-slide.login.active {
       transform: translateY(0);
       opacity: 1;
       z-index: 3;
     }
 
-    /* Регистрация активна — выехала снизу */
     .screen-slide.register.active {
       transform: translateY(0);
       opacity: 1;
       z-index: 3;
     }
 
-    /* Первый экран скрыт — уехал вверх */
     .screen-slide.first.hidden {
       transform: translateY(-100%);
       opacity: 0;
       z-index: 0;
     }
 
-    /* ===== ГОРИЗОНТАЛЬНАЯ АНИМАЦИЯ ДЛЯ LOGIN ↔ REGISTER ===== */
-
-    /* Регистрация уезжает влево при переходе на вход */
     .screen-slide.register.to-login {
       transform: translateX(-100%);
       opacity: 0;
       z-index: 1;
     }
 
-    /* Вход приезжает справа при переходе с регистрации */
     .screen-slide.login.from-register {
       transform: translateX(100%);
       opacity: 0;
       z-index: 1;
     }
 
-    /* Вход уезжает вправо при переходе на регистрацию */
     .screen-slide.login.to-register {
       transform: translateX(100%);
       opacity: 0;
       z-index: 1;
     }
 
-    /* Регистрация приезжает слева при переходе с входа */
     .screen-slide.register.from-login {
       transform: translateX(-100%);
       opacity: 0;
       z-index: 1;
-    }
-
-    /* ===== ДОПОЛНИТЕЛЬНО: БЕЛЫЙ ФОН ДЛЯ КОНТЕНТА, НО НЕ ДЛЯ ВСЕГО ЭКРАНА ===== */
-    /* Поля ввода и кнопки остаются белыми, а фон экрана прозрачным */
-    .input-field,
-    .social-btn,
-    .cta-button {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(2px);
-    }
-
-    /* Чтобы текст читался на фоне папоротников */
-    .main-headline,
-    .sub-headline,
-    .logo,
-    .footer-link,
-    .social-label,
-    .divider,
-    .input-group label {
-      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6);
     }
 
     /* ===== АДАПТИВНОСТЬ ===== */
