@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Регистрация — Ты не один</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet" />
   <style>
-    /* ===== ПОЛНЫЙ СБРОС И ФИКСАЦИЯ ===== */
     * {
       margin: 0;
       padding: 0;
@@ -17,7 +17,7 @@
       height: 100%;
       overflow: hidden;
       background: #ffffff;
-      font-family: -apple-system, "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
+      font-family: 'Inconsolata', 'Courier New', monospace;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       touch-action: none;
@@ -28,7 +28,6 @@
       bottom: 0;
     }
 
-    /* ===== ПОЛНОЭКРАННЫЙ КОНТЕЙНЕР ===== */
     .app-screen {
       position: fixed;
       top: 0;
@@ -51,13 +50,13 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ===== ДЕКОРАТИВНЫЙ ФОН — ПАПОРОТНИКИ ===== */
+    /* ===== ПАПОРОТНИКИ ===== */
     .fern-bg {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      bottom: 0;
+      right: 0;
+      width: 70%;
+      height: 70%;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
@@ -65,38 +64,28 @@
 
     .fern {
       position: absolute;
-      opacity: 0.22;
-      stroke: #d9d9d9;
+      stroke: #e5e7e5;
       fill: none;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
 
     .fern-1 {
-      top: -6%;
-      right: -14%;
-      width: 82%;
-      height: 70%;
-      transform: rotate(18deg);
-      opacity: 0.18;
+      bottom: 0%;
+      right: 0%;
+      width: 55%;
+      height: 60%;
+      transform: rotate(-4deg);
+      opacity: 0.45;
     }
 
     .fern-2 {
-      bottom: -8%;
-      left: -18%;
-      width: 90%;
-      height: 60%;
-      transform: rotate(-12deg);
-      opacity: 0.16;
-    }
-
-    .fern-3 {
-      top: 28%;
-      left: -12%;
-      width: 50%;
-      height: 40%;
-      transform: rotate(40deg);
-      opacity: 0.13;
+      bottom: 0%;
+      right: -2%;
+      width: 38%;
+      height: 45%;
+      transform: rotate(8deg);
+      opacity: 0.35;
     }
 
     /* ===== КОНТЕНТ ===== */
@@ -111,36 +100,44 @@
       padding-bottom: 4%;
     }
 
-    /* ===== ЛОГОТИП ===== */
     .logo {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 32px;
       font-size: 20px;
-      font-weight: 650;
+      font-weight: 700;
       letter-spacing: 2px;
       color: #1e1e1e;
       user-select: none;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 700;
     }
+    .logo span { color: #2b7a4b; }
 
-    .logo span {
-      color: #2b7a4b;
-    }
-
-    /* ===== ЗАГОЛОВОК ===== */
-    .main-headline {
+    .page-title {
       font-size: clamp(26px, 6.5vw, 36px);
-      font-weight: 650;
+      font-weight: 700;
       line-height: 1.15;
       letter-spacing: -0.3px;
       color: #1e1e1e;
-      margin-bottom: 24px;
+      margin-bottom: 8px;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 700;
     }
 
-    /* ===== ГРУППЫ ПОЛЕЙ ===== */
+    .sub-title {
+      font-size: clamp(20px, 5vw, 28px);
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.2px;
+      color: #1e1e1e;
+      margin-bottom: 24px;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 400;
+    }
+
     .input-group {
       margin-bottom: 20px;
     }
-
     .input-group label {
       display: block;
       font-size: 15px;
@@ -148,6 +145,8 @@
       color: #1e1e1e;
       margin-bottom: 6px;
       letter-spacing: 0.2px;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 500;
     }
 
     .input-wrapper {
@@ -158,9 +157,11 @@
       width: 100%;
       padding: 18px 20px;
       font-size: 17px;
-      font-family: inherit;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 400;
       color: #1e1e1e;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(4px);
       border: 1.5px solid #e0e0e0;
       border-radius: 16px;
       outline: none;
@@ -173,35 +174,24 @@
       border-color: #2b7a4b;
       box-shadow: 0 0 0 3px rgba(43, 122, 75, 0.08);
     }
-
-    .input-field.error {
-      border-color: #e74c3c;
-    }
-
-    .input-field.error:focus {
-      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.08);
-    }
-
+    .input-field.error { border-color: #e74c3c; }
     .input-field::placeholder {
       color: #b0b0b0;
       font-weight: 400;
       letter-spacing: 0.2px;
     }
 
-    /* ===== СООБЩЕНИЯ ОБ ОШИБКАХ ===== */
     .error-message {
       display: none;
       font-size: 13px;
       color: #e74c3c;
       margin-top: 6px;
       padding-left: 4px;
-      letter-spacing: 0.2px;
       animation: shake 0.3s ease;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 400;
     }
-
-    .error-message.visible {
-      display: block;
-    }
+    .error-message.visible { display: block; }
 
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
@@ -209,11 +199,10 @@
       75% { transform: translateX(6px); }
     }
 
-    /* ===== КНОПКА "ДАЛЕЕ" ===== */
     .cta-button {
       width: 100%;
       padding: 18px;
-      margin-top: 12px;
+      margin-top: 4px;
       background: #2b7a4b;
       color: #ffffff;
       border: none;
@@ -222,94 +211,58 @@
       font-weight: 600;
       letter-spacing: 0.6px;
       cursor: pointer;
-      transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+      transition: background 0.2s ease, transform 0.15s ease;
       box-shadow: 0 6px 24px rgba(43, 122, 75, 0.18);
-      font-family: inherit;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 600;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
     }
-
     .cta-button:active {
       transform: scale(0.96);
       background: #1d5c34;
     }
 
-    .cta-button:disabled {
-      opacity: 0.6;
-      transform: none;
-    }
-
-    /* ===== ССЫЛКА "ВОЙТИ" ===== */
     .footer-link {
       margin-top: auto;
       text-align: center;
       font-size: 15px;
       color: #4a4a4a;
-      font-weight: 420;
+      font-weight: 400;
       padding-top: 20px;
       letter-spacing: 0.2px;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 400;
     }
-
     .footer-link a {
       color: #2b7a4b;
       text-decoration: none;
       font-weight: 500;
+      cursor: pointer;
       border-bottom: 1px solid transparent;
       transition: border-color 0.2s ease;
-      cursor: pointer;
+      font-variation-settings: 'wght' 500;
     }
-
-    .footer-link a:active {
-      border-bottom-color: #2b7a4b;
-    }
+    .footer-link a:active { border-bottom-color: #2b7a4b; }
 
     /* ===== АДАПТИВНОСТЬ ===== */
     @media (max-width: 420px) {
-      .app-screen {
-        padding: 32px 20px 28px;
-      }
-      .logo {
-        font-size: 17px;
-        margin-bottom: 32px;
-      }
-      .input-field {
-        padding: 16px 18px;
-        font-size: 16px;
-      }
-      .cta-button {
-        padding: 16px;
-        font-size: 16px;
-      }
+      .app-screen { padding: 32px 20px 28px; }
+      .logo { font-size: 17px; margin-bottom: 24px; }
+      .input-field { padding: 16px 18px; font-size: 16px; }
+      .cta-button { padding: 16px; font-size: 16px; }
+      .page-title { font-size: 22px; }
+      .sub-title { font-size: 18px; }
     }
 
     @media (max-width: 360px) {
-      .app-screen {
-        padding: 24px 16px 20px;
-      }
-      .main-headline {
-        font-size: 22px;
-      }
-      .input-field {
-        padding: 14px 16px;
-        font-size: 15px;
-      }
-      .cta-button {
-        padding: 14px;
-        font-size: 15px;
-      }
-      .footer-link {
-        font-size: 13px;
-      }
+      .app-screen { padding: 24px 16px 20px; }
+      .page-title { font-size: 20px; }
+      .sub-title { font-size: 16px; }
+      .input-field { padding: 14px 16px; font-size: 15px; }
+      .cta-button { padding: 14px; font-size: 15px; }
     }
 
-    /* Для очень высоких экранов */
-    @media (min-aspect-ratio: 9/16) {
-      .content {
-        justify-content: center;
-      }
-    }
-
-    /* Для desktop — центрирование */
     @media (min-width: 600px) {
       .app-screen {
         max-width: 480px;
@@ -330,100 +283,72 @@
 
 <div class="app-screen" id="appScreen">
 
-  <!-- Фоновые папоротники -->
+  <!-- Папоротники -->
   <div class="fern-bg" aria-hidden="true">
-    <svg class="fern fern-1" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M150 20 C120 60 80 120 60 180 C50 210 45 240 50 270 C55 300 70 330 90 350 C110 370 130 380 150 380" stroke="#d9d9d9" stroke-width="1.8"/>
-      <path d="M150 20 C180 60 220 120 240 180 C250 210 255 240 250 270 C245 300 230 330 210 350 C190 370 170 380 150 380" stroke="#d9d9d9" stroke-width="1.8"/>
-      <path d="M150 40 C130 80 100 130 85 180 C78 210 75 240 80 270" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M150 40 C170 80 200 130 215 180 C222 210 225 240 220 270" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M150 60 C140 100 125 150 120 200 C118 220 118 240 122 260" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M150 60 C160 100 175 150 180 200 C182 220 182 240 178 260" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M85 180 C75 200 68 220 65 240" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M215 180 C225 200 232 220 235 240" stroke="#d9d9d9" stroke-width="1.2"/>
+    <svg class="fern fern-1" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M380 390 C350 340 300 270 250 210 C210 160 175 120 155 85 C145 68 138 55 135 42" stroke="#e5e7e5" stroke-width="2.2"/>
+      <path d="M300 270 C280 280 260 290 245 300" stroke="#e5e7e5" stroke-width="1.6"/>
+      <path d="M300 270 C320 280 340 290 355 300" stroke="#e5e7e5" stroke-width="1.6"/>
+      <path d="M260 220 C242 228 225 235 212 245" stroke="#e5e7e5" stroke-width="1.4"/>
+      <path d="M260 220 C278 228 295 235 308 245" stroke="#e5e7e5" stroke-width="1.4"/>
+      <path d="M225 175 C210 182 195 188 185 198" stroke="#e5e7e5" stroke-width="1.2"/>
+      <path d="M225 175 C240 182 255 188 265 198" stroke="#e5e7e5" stroke-width="1.2"/>
+      <path d="M195 140 C183 146 172 152 165 162" stroke="#e5e7e5" stroke-width="1.0"/>
+      <path d="M195 140 C207 146 218 152 225 162" stroke="#e5e7e5" stroke-width="1.0"/>
+      <path d="M170 110 C160 115 152 120 148 128" stroke="#e5e7e5" stroke-width="0.9"/>
+      <path d="M170 110 C180 115 188 120 192 128" stroke="#e5e7e5" stroke-width="0.9"/>
+      <path d="M135 42 C125 48 118 52 115 58" stroke="#e5e7e5" stroke-width="0.8"/>
+      <path d="M135 42 C145 48 152 52 155 58" stroke="#e5e7e5" stroke-width="0.8"/>
     </svg>
 
-    <svg class="fern fern-2" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M30 380 C60 340 100 280 140 220 C160 190 175 160 185 130 C195 100 200 70 195 40 C190 20 180 10 170 5" stroke="#d9d9d9" stroke-width="1.8"/>
-      <path d="M30 380 C0 340 -40 280 -80 220 C-100 190 -115 160 -125 130 C-135 100 -140 70 -135 40 C-130 20 -120 10 -110 5" stroke="#d9d9d9" stroke-width="1.8"/>
-      <path d="M50 360 C70 320 100 270 130 220 C145 195 155 170 162 145" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M10 360 C-10 320 -40 270 -70 220 C-85 195 -95 170 -102 145" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M70 340 C90 300 115 255 140 210 C150 190 158 170 163 150" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M-10 340 C-30 300 -55 255 -80 210 C-90 190 -98 170 -103 150" stroke="#d9d9d9" stroke-width="1.2"/>
-    </svg>
-
-    <svg class="fern fern-3" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 280 C40 240 80 180 110 120 C125 90 135 60 138 30 C139 15 135 5 130 0" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M20 280 C0 240 -40 180 -70 120 C-85 90 -95 60 -98 30 C-99 15 -95 5 -90 0" stroke="#d9d9d9" stroke-width="1.5"/>
-      <path d="M30 260 C50 220 80 170 105 120 C115 100 122 80 125 60" stroke="#d9d9d9" stroke-width="1.2"/>
-      <path d="M10 260 C-10 220 -40 170 -65 120 C-75 100 -82 80 -85 60" stroke="#d9d9d9" stroke-width="1.2"/>
+    <svg class="fern fern-2" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M280 290 C260 250 230 200 200 160 C178 130 160 105 150 85 C145 75 142 68 140 60" stroke="#e5e7e5" stroke-width="2.0"/>
+      <path d="M230 200 C215 208 200 215 190 225" stroke="#e5e7e5" stroke-width="1.4"/>
+      <path d="M230 200 C245 208 260 215 270 225" stroke="#e5e7e5" stroke-width="1.4"/>
+      <path d="M200 160 C188 168 175 175 168 185" stroke="#e5e7e5" stroke-width="1.2"/>
+      <path d="M200 160 C212 168 225 175 232 185" stroke="#e5e7e5" stroke-width="1.2"/>
+      <path d="M170 130 C160 136 152 142 148 150" stroke="#e5e7e5" stroke-width="1.0"/>
+      <path d="M170 130 C180 136 188 142 192 150" stroke="#e5e7e5" stroke-width="1.0"/>
+      <path d="M150 105 C142 110 136 115 133 122" stroke="#e5e7e5" stroke-width="0.8"/>
+      <path d="M150 105 C158 110 164 115 167 122" stroke="#e5e7e5" stroke-width="0.8"/>
     </svg>
   </div>
 
   <!-- ===== КОНТЕНТ ===== -->
   <div class="content">
 
-    <!-- Логотип -->
-    <div class="logo">
-      <span>{</span>LOGOTYPE<span>}</span>
-    </div>
+    <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
 
-    <!-- Заголовок -->
-    <h1 class="main-headline">
-      Введи почту
-    </h1>
+    <h1 class="page-title">Регистрация</h1>
+    <p class="sub-title">Введи почту</p>
 
-    <!-- Поле Email -->
     <div class="input-group">
       <div class="input-wrapper">
-        <input
-          type="email"
-          class="input-field"
-          id="emailInput"
-          placeholder="Электронная почта"
-          autocomplete="email"
-          inputmode="email"
-        />
+        <input type="email" class="input-field" id="regEmail" placeholder="Электронная почта" autocomplete="email" inputmode="email" />
         <div class="error-message" id="emailError"></div>
       </div>
     </div>
 
-    <!-- Поле Пароль -->
     <div class="input-group">
-      <label for="passwordInput">Придумай пароль</label>
+      <label for="regPassword">Придумай пароль</label>
       <div class="input-wrapper">
-        <input
-          type="password"
-          class="input-field"
-          id="passwordInput"
-          placeholder="Пароль"
-          autocomplete="new-password"
-        />
+        <input type="password" class="input-field" id="regPassword" placeholder="Пароль" autocomplete="new-password" />
         <div class="error-message" id="passwordError"></div>
       </div>
     </div>
 
-    <!-- Поле Повтор пароля -->
     <div class="input-group">
-      <label for="confirmInput">Повтори пароль</label>
+      <label for="regConfirm">Повтори пароль</label>
       <div class="input-wrapper">
-        <input
-          type="password"
-          class="input-field"
-          id="confirmInput"
-          placeholder="Повторите пароль"
-          autocomplete="new-password"
-        />
+        <input type="password" class="input-field" id="regConfirm" placeholder="Повторите пароль" autocomplete="new-password" />
         <div class="error-message" id="confirmError"></div>
       </div>
     </div>
 
-    <!-- Кнопка -->
-    <button class="cta-button" id="nextBtn">ДАЛЕЕ</button>
+    <button class="cta-button" id="regBtn">ДАЛЕЕ</button>
 
-    <!-- Ссылка внизу -->
     <div class="footer-link">
-      Уже есть аккаунт? <a href="#" id="loginLink">войти</a>
+      Уже есть аккаунт? <a href="#" id="toLogin">войти</a>
     </div>
 
   </div>
@@ -431,30 +356,34 @@
 
 <script>
   (function() {
-    // ===== DOM-ЭЛЕМЕНТЫ =====
-    const emailInput = document.getElementById('emailInput');
-    const passwordInput = document.getElementById('passwordInput');
-    const confirmInput = document.getElementById('confirmInput');
-    const nextBtn = document.getElementById('nextBtn');
-    const loginLink = document.getElementById('loginLink');
+    const appScreen = document.getElementById('appScreen');
+    const regEmail = document.getElementById('regEmail');
+    const regPassword = document.getElementById('regPassword');
+    const regConfirm = document.getElementById('regConfirm');
+    const regBtn = document.getElementById('regBtn');
+    const toLogin = document.getElementById('toLogin');
 
     const emailError = document.getElementById('emailError');
     const passwordError = document.getElementById('passwordError');
     const confirmError = document.getElementById('confirmError');
 
-    const appScreen = document.getElementById('appScreen');
+    // ===== АНИМАЦИЯ =====
+    setTimeout(() => {
+      appScreen.style.opacity = '1';
+      appScreen.style.transform = 'translateY(0)';
+    }, 50);
 
-    // ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
-    function showError(element, message) {
-      element.textContent = message;
-      element.classList.add('visible');
-      const input = element.closest('.input-wrapper').querySelector('.input-field');
+    // ===== ВАЛИДАЦИЯ =====
+    function showError(el, msg) {
+      el.textContent = msg;
+      el.classList.add('visible');
+      const input = el.closest('.input-wrapper').querySelector('.input-field');
       if (input) input.classList.add('error');
     }
 
-    function hideError(element) {
-      element.classList.remove('visible');
-      const input = element.closest('.input-wrapper').querySelector('.input-field');
+    function hideError(el) {
+      el.classList.remove('visible');
+      const input = el.closest('.input-wrapper').querySelector('.input-field');
       if (input) input.classList.remove('error');
     }
 
@@ -462,137 +391,94 @@
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    function clearAllErrors() {
+    function clearErrors() {
       hideError(emailError);
       hideError(passwordError);
       hideError(confirmError);
     }
 
-    // ===== ВАЛИДАЦИЯ ФОРМЫ =====
-    function validateForm() {
-      clearAllErrors();
+    function validate() {
+      clearErrors();
 
-      const email = emailInput.value.trim();
-      const password = passwordInput.value.trim();
-      const confirm = confirmInput.value.trim();
+      const email = regEmail.value.trim();
+      const password = regPassword.value.trim();
+      const confirm = regConfirm.value.trim();
 
-      let isValid = true;
+      let valid = true;
 
-      // Проверка email
       if (!email) {
-        showError(emailError, 'Пожалуйста, введите email');
-        isValid = false;
+        showError(emailError, 'Введите email');
+        valid = false;
       } else if (!isValidEmail(email)) {
-        showError(emailError, 'Введите корректный email (например, user@mail.com)');
-        isValid = false;
+        showError(emailError, 'Некорректный email');
+        valid = false;
       }
 
-      // Проверка пароля
       if (!password) {
-        showError(passwordError, 'Пожалуйста, придумайте пароль');
-        isValid = false;
+        showError(passwordError, 'Придумайте пароль');
+        valid = false;
       } else if (password.length < 6) {
-        showError(passwordError, 'Пароль должен содержать минимум 6 символов');
-        isValid = false;
+        showError(passwordError, 'Минимум 6 символов');
+        valid = false;
       }
 
-      // Проверка подтверждения
       if (!confirm) {
-        showError(confirmError, 'Пожалуйста, подтвердите пароль');
-        isValid = false;
+        showError(confirmError, 'Подтвердите пароль');
+        valid = false;
       } else if (password && confirm && password !== confirm) {
         showError(confirmError, 'Пароли не совпадают');
-        isValid = false;
+        valid = false;
       }
 
-      return isValid;
+      return valid;
     }
 
-    // ===== ОБРАБОТЧИК КНОПКИ "ДАЛЕЕ" =====
-    nextBtn.addEventListener('click', function(e) {
-      e.preventDefault();
-
-      if (validateForm()) {
-        // Переход на /username с анимацией
-        const url = 'https://destr123.github.io/-NAME-/username';
+    regBtn.addEventListener('click', function() {
+      if (validate()) {
         appScreen.style.opacity = '0';
         appScreen.style.transform = 'translateY(-8px)';
         appScreen.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-
         setTimeout(() => {
-          window.location.href = url;
+          window.location.href = 'https://destr123.github.io/-NAME-/username';
         }, 350);
       }
     });
 
-    // ===== ОБРАБОТЧИК ССЫЛКИ "ВОЙТИ" =====
-    loginLink.addEventListener('click', function(e) {
+    toLogin.addEventListener('click', function(e) {
       e.preventDefault();
-
-      const url = 'https://destr123.github.io/-NAME-/login';
       appScreen.style.opacity = '0';
       appScreen.style.transform = 'translateY(-8px)';
       appScreen.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-
       setTimeout(() => {
-        window.location.href = url;
+        window.location.href = 'https://destr123.github.io/-NAME-/login';
       }, 350);
     });
 
-    // ===== ОЧИСТКА ОШИБОК ПРИ ВВОДЕ =====
-    emailInput.addEventListener('input', function() {
-      if (this.value.trim()) {
-        hideError(emailError);
-      }
-    });
+    // Очистка ошибок при вводе
+    regEmail.addEventListener('input', () => hideError(emailError));
+    regPassword.addEventListener('input', () => hideError(passwordError));
+    regConfirm.addEventListener('input', () => hideError(confirmError));
 
-    passwordInput.addEventListener('input', function() {
-      if (this.value.trim()) {
-        hideError(passwordError);
-      }
-    });
-
-    confirmInput.addEventListener('input', function() {
-      if (this.value.trim()) {
-        hideError(confirmError);
-      }
-    });
-
-    // ===== ВАЛИДАЦИЯ ПРИ ПОТЕРЕ ФОКУСА =====
-    emailInput.addEventListener('blur', function() {
+    regEmail.addEventListener('blur', function() {
       const val = this.value.trim();
       if (val && !isValidEmail(val)) {
-        showError(emailError, 'Введите корректный email (например, user@mail.com)');
+        showError(emailError, 'Некорректный email');
       }
     });
 
-    confirmInput.addEventListener('blur', function() {
-      const password = passwordInput.value.trim();
+    regConfirm.addEventListener('blur', function() {
+      const pass = regPassword.value.trim();
       const confirm = this.value.trim();
-      if (password && confirm && password !== confirm) {
+      if (pass && confirm && pass !== confirm) {
         showError(confirmError, 'Пароли не совпадают');
       }
     });
 
-    // ===== ЗАПУСК АНИМАЦИИ ВХОДА =====
-    appScreen.style.opacity = '0';
-    setTimeout(() => {
-      appScreen.style.opacity = '1';
-      appScreen.style.transform = 'translateY(0)';
-      appScreen.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-    }, 50);
-
-    // ===== БЛОКИРОВКА СКРОЛЛА И ЗУМА =====
-    document.addEventListener('gesturestart', function(e) {
-      e.preventDefault();
+    regConfirm.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') regBtn.click();
     });
 
-    // ===== ЗАПУСК ВАЛИДАЦИИ ПО КЛАВИШЕ ENTER =====
-    confirmInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        nextBtn.click();
-      }
-    });
+    document.addEventListener('gesturestart', e => e.preventDefault());
 
   })();
 </script>
