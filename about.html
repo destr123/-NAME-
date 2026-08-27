@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Добро пожаловать — Ты не один</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #ffffff;
+      font-family: 'Inconsolata', 'Courier New', monospace;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      touch-action: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .app-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background: #ffffff;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .app-screen.show {
+      opacity: 1;
+    }
+
+    .welcome-text {
+      font-size: clamp(36px, 10vw, 56px);
+      font-weight: 700;
+      color: #1e1e1e;
+      font-family: 'Inconsolata', monospace;
+      font-variation-settings: 'wght' 700;
+      letter-spacing: 2px;
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .welcome-text.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* desktop */
+    @media (min-width: 600px) {
+      body {
+        background: #f5f5f7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .app-screen {
+        max-width: 480px;
+        border-radius: 0;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.06);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-screen" id="appScreen">
+  <div class="welcome-text" id="welcomeText">Добро пожаловать</div>
+</div>
+
+<script>
+  (function() {
+    const appScreen = document.getElementById('appScreen');
+    const welcomeText = document.getElementById('welcomeText');
+
+    // Появление
+    setTimeout(() => {
+      appScreen.classList.add('show');
+    }, 50);
+
+    setTimeout(() => {
+      welcomeText.classList.add('visible');
+    }, 300);
+
+    // Исчезновение
+    setTimeout(() => {
+      welcomeText.classList.remove('visible');
+    }, 1800);
+
+    setTimeout(() => {
+      appScreen.classList.remove('show');
+    }, 2200);
+
+    // Переход на /home
+    setTimeout(() => {
+      window.location.href = 'https://destr123.github.io/-NAME-/home';
+    }, 2500);
+
+    // Блокировка скролла
+    document.addEventListener('gesturestart', e => e.preventDefault());
+
+  })();
+</script>
+
+</body>
+</html>
