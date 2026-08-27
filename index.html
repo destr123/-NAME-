@@ -1,0 +1,1655 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Ты не один</title>
+  <style>
+    /* ===== БАЗА ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #ffffff;
+      font-family: -apple-system, "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      touch-action: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .app-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background: #ffffff;
+      overflow: hidden;
+      padding: 40px 28px 36px;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    /* ===== ПАПОРОТНИКИ ===== */
+    .fern-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .fern {
+      position: absolute;
+      opacity: 0.22;
+      stroke: #d9d9d9;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .fern-1 {
+      top: -6%;
+      right: -14%;
+      width: 82%;
+      height: 70%;
+      transform: rotate(18deg);
+      opacity: 0.18;
+    }
+    .fern-2 {
+      bottom: -8%;
+      left: -18%;
+      width: 90%;
+      height: 60%;
+      transform: rotate(-12deg);
+      opacity: 0.16;
+    }
+    .fern-3 {
+      top: 28%;
+      left: -12%;
+      width: 50%;
+      height: 40%;
+      transform: rotate(40deg);
+      opacity: 0.13;
+    }
+
+    /* ===== ОБЩИЕ СТИЛИ ===== */
+    .content {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+      padding-bottom: 4%;
+      height: 100%;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 20px;
+      font-weight: 650;
+      letter-spacing: 2px;
+      color: #1e1e1e;
+      user-select: none;
+    }
+    .logo span { color: #2b7a4b; }
+
+    .main-headline {
+      font-size: clamp(26px, 6.5vw, 36px);
+      font-weight: 650;
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+      color: #1e1e1e;
+      margin-bottom: 24px;
+    }
+
+    .sub-headline {
+      font-size: clamp(16px, 4vw, 22px);
+      font-weight: 420;
+      line-height: 1.4;
+      color: #4a4a4a;
+      margin-bottom: 48px;
+      max-width: 90%;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+    .input-group label {
+      display: block;
+      font-size: 15px;
+      font-weight: 500;
+      color: #1e1e1e;
+      margin-bottom: 6px;
+      letter-spacing: 0.2px;
+    }
+
+    .input-wrapper { position: relative; }
+
+    .input-field {
+      width: 100%;
+      padding: 18px 20px;
+      font-size: 17px;
+      font-family: inherit;
+      color: #1e1e1e;
+      background: #ffffff;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 16px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .input-field:focus {
+      border-color: #2b7a4b;
+      box-shadow: 0 0 0 3px rgba(43, 122, 75, 0.08);
+    }
+    .input-field.error { border-color: #e74c3c; }
+    .input-field::placeholder {
+      color: #b0b0b0;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+
+    .error-message {
+      display: none;
+      font-size: 13px;
+      color: #e74c3c;
+      margin-top: 6px;
+      padding-left: 4px;
+      animation: shake 0.3s ease;
+    }
+    .error-message.visible { display: block; }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    .cta-button {
+      width: 100%;
+      padding: 18px;
+      margin-top: 12px;
+      background: #2b7a4b;
+      color: #ffffff;
+      border: none;
+      border-radius: 60px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+      box-shadow: 0 6px 24px rgba(43, 122, 75, 0.18);
+      font-family: inherit;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .cta-button:active {
+      transform: scale(0.96);
+      background: #1d5c34;
+    }
+
+    .footer-link {
+      margin-top: auto;
+      text-align: center;
+      font-size: 15px;
+      color: #4a4a4a;
+      font-weight: 420;
+      padding-top: 20px;
+      letter-spacing: 0.2px;
+    }
+    .footer-link a {
+      color: #2b7a4b;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+    .footer-link a:active { border-bottom-color: #2b7a4b; }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 12px 0 28px;
+      color: #b8b8b8;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e8e8e8;
+    }
+
+    .social-label {
+      font-size: 15px;
+      color: #4a4a4a;
+      margin-bottom: 16px;
+      font-weight: 420;
+      letter-spacing: 0.2px;
+    }
+
+    .social-buttons {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      flex: 1;
+      min-width: 80px;
+      padding: 14px 8px;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 60px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #1e1e1e;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      letter-spacing: 0.3px;
+    }
+    .social-btn svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+    .social-btn:active {
+      transform: scale(0.96);
+      border-color: #2b7a4b;
+      background: #f8faf9;
+    }
+    .social-btn.telegram:hover { border-color: #0088cc; background: #f0f7fc; }
+    .social-btn.google:hover { border-color: #ea4335; background: #fcf0ef; }
+    .social-btn.apple:hover { border-color: #1e1e1e; background: #f5f5f5; }
+
+    /* ===== ТИПОГРАФСКИЙ КУРСОР ===== */
+    .typewriter-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 0.85em;
+      background: #1e1e1e;
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 1.1s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* ===== КОНТЕЙНЕР ЭКРАНОВ ===== */
+    .screen-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Базовый класс для всех экранов */
+    .screen-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 40px 28px 36px;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      background: #ffffff;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
+      will-change: transform, opacity;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+    }
+
+    /* ===== ПОЗИЦИИ ПО УМОЛЧАНИЮ ===== */
+
+    /* Первый экран — всегда виден, пока не скроется */
+    .screen-slide.first {
+      transform: translateY(0);
+      opacity: 1;
+      z-index: 2;
+    }
+
+    /* Вход и регистрация — скрыты снизу */
+    .screen-slide.login {
+      transform: translateY(100%);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .screen-slide.register {
+      transform: translateY(100%);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* ===== АКТИВНЫЕ СОСТОЯНИЯ ===== */
+
+    /* Вход активен — выехал снизу */
+    .screen-slide.login.active {
+      transform: translateY(0);
+      opacity: 1;
+      z-index: 3;
+    }
+
+    /* Регистрация активна — выехала снизу */
+    .screen-slide.register.active {
+      transform: translateY(0);
+      opacity: 1;
+      z-index: 3;
+    }
+
+    /* Первый экран скрыт — уехал вверх */
+    .screen-slide.first.hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      z-index: 0;
+    }
+
+    /* ===== ГОРИЗОНТАЛЬНАЯ АНИМАЦИЯ ДЛЯ LOGIN ↔ REGISTER ===== */
+
+    /* Регистрация уезжает влево при переходе на вход */
+    .screen-slide.register.to-login {
+      transform: translateX(-100%);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* Вход приезжает справа при переходе с регистрации */
+    .screen-slide.login.from-register {
+      transform: translateX(100%);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* Вход уезжает вправо при переходе на регистрацию */
+    .screen-slide.login.to-register {
+      transform: translateX(100%);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* Регистрация приезжает слева при переходе с входа */
+    .screen-slide.register.from-login {
+      transform: translateX(-100%);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* ===== АДАПТИВНОСТЬ ===== */
+    @media (max-width: 420px) {
+      .screen-slide { padding: 32px 20px 28px; }
+      .logo { font-size: 17px; margin-bottom: 32px; }
+      .input-field { padding: 16px 18px; font-size: 16px; }
+      .cta-button { padding: 16px; font-size: 16px; }
+      .social-btn { font-size: 13px; padding: 12px 6px; min-width: 60px; }
+      .social-btn svg { width: 18px; height: 18px; }
+    }
+
+    @media (max-width: 360px) {
+      .screen-slide { padding: 24px 16px 20px; }
+      .main-headline { font-size: 22px; }
+      .input-field { padding: 14px 16px; font-size: 15px; }
+      .cta-button { padding: 14px; font-size: 15px; }
+      .footer-link { font-size: 13px; }
+      .social-btn { font-size: 12px; padding: 10px 4px; min-width: 50px; }
+      .social-btn svg { width: 16px; height: 16px; }
+    }
+
+    @media (min-width: 600px) {
+      .app-screen {
+        max-width: 480px;
+        margin: 0 auto;
+        border-radius: 0;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.06);
+      }
+      body {
+        background: #f5f5f7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .screen-slide { padding: 48px 32px 40px; }
+    }
+
+    @media (min-aspect-ratio: 9/16) {
+      .content { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-screen">
+  <!-- Фоновые папоротники -->
+  <div class="fern-bg" aria-hidden="true">
+    <svg class="fern fern-1" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M150 20 C120 60 80 120 60 180 C50 210 45 240 50 270 C55 300 70 330 90 350 C110 370 130 380 150 380" stroke="#d9d9d9" stroke-width="1.8"/>
+      <path d="M150 20 C180 60 220 120 240 180 C250 210 255 240 250 270 C245 300 230 330 210 350 C190 370 170 380 150 380" stroke="#d9d9d9" stroke-width="1.8"/>
+      <path d="M150 40 C130 80 100 130 85 180 C78 210 75 240 80 270" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M150 40 C170 80 200 130 215 180 C222 210 225 240 220 270" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M150 60 C140 100 125 150 120 200 C118 220 118 240 122 260" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M150 60 C160 100 175 150 180 200 C182 220 182 240 178 260" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M85 180 C75 200 68 220 65 240" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M215 180 C225 200 232 220 235 240" stroke="#d9d9d9" stroke-width="1.2"/>
+    </svg>
+    <svg class="fern fern-2" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 380 C60 340 100 280 140 220 C160 190 175 160 185 130 C195 100 200 70 195 40 C190 20 180 10 170 5" stroke="#d9d9d9" stroke-width="1.8"/>
+      <path d="M30 380 C0 340 -40 280 -80 220 C-100 190 -115 160 -125 130 C-135 100 -140 70 -135 40 C-130 20 -120 10 -110 5" stroke="#d9d9d9" stroke-width="1.8"/>
+      <path d="M50 360 C70 320 100 270 130 220 C145 195 155 170 162 145" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M10 360 C-10 320 -40 270 -70 220 C-85 195 -95 170 -102 145" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M70 340 C90 300 115 255 140 210 C150 190 158 170 163 150" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M-10 340 C-30 300 -55 255 -80 210 C-90 190 -98 170 -103 150" stroke="#d9d9d9" stroke-width="1.2"/>
+    </svg>
+    <svg class="fern fern-3" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 280 C40 240 80 180 110 120 C125 90 135 60 138 30 C139 15 135 5 130 0" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M20 280 C0 240 -40 180 -70 120 C-85 90 -95 60 -98 30 C-99 15 -95 5 -90 0" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M30 260 C50 220 80 170 105 120 C115 100 122 80 125 60" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M10 260 C-10 220 -40 170 -65 120 C-75 100 -82 80 -85 60" stroke="#d9d9d9" stroke-width="1.2"/>
+    </svg>
+  </div>
+
+  <!-- КОНТЕЙНЕР ЭКРАНОВ -->
+  <div class="screen-container">
+
+    <!-- ======== ЭКРАН 1: FIRST ======== -->
+    <div class="screen-slide first" id="screenFirst">
+      <div class="content">
+        <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
+
+        <h1 class="main-headline" id="headline">
+          Иногда тебя понимает только тот, кто чувствует то же самое
+          <span class="typewriter-cursor"></span>
+        </h1>
+
+        <p class="sub-headline">
+          Расскажи о себе и найди похожих людей!
+        </p>
+
+        <button class="cta-button" id="firstCta">РАССКАЗАТЬ!</button>
+      </div>
+    </div>
+
+    <!-- ======== ЭКРАН 2: LOGIN ======== -->
+    <div class="screen-slide login" id="screenLogin">
+      <div class="content">
+        <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
+
+        <h1 class="main-headline">Введи почту</h1>
+
+        <div class="input-group">
+          <div class="input-wrapper">
+            <input type="email" class="input-field" id="loginEmail" placeholder="Электронная почта" autocomplete="email" inputmode="email" />
+            <div class="error-message" id="loginEmailError"></div>
+          </div>
+        </div>
+
+        <div class="divider">ИЛИ</div>
+
+        <p class="social-label">Войти с помощью:</p>
+
+        <div class="social-buttons">
+          <button class="social-btn telegram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            TELEGRAM
+          </button>
+          <button class="social-btn google">
+            <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            GOOGLE
+          </button>
+          <button class="social-btn apple">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            APPLE
+          </button>
+        </div>
+
+        <div class="footer-link">
+          Нет аккаунта? <a href="#" id="toRegister">зарегистрироваться</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======== ЭКРАН 3: REGISTER ======== -->
+    <div class="screen-slide register" id="screenRegister">
+      <div class="content">
+        <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
+
+        <h1 class="main-headline">Введи почту</h1>
+
+        <div class="input-group">
+          <div class="input-wrapper">
+            <input type="email" class="input-field" id="regEmail" placeholder="Электронная почта" autocomplete="email" inputmode="email" />
+            <div class="error-message" id="regEmailError"></div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="regPassword">Придумай пароль</label>
+          <div class="input-wrapper">
+            <input type="password" class="input-field" id="regPassword" placeholder="Пароль" autocomplete="new-password" />
+            <div class="error-message" id="regPasswordError"></div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="regConfirm">Повтори пароль</label>
+          <div class="input-wrapper">
+            <input type="password" class="input-field" id="regConfirm" placeholder="Повторите пароль" autocomplete="new-password" />
+            <div class="error-message" id="regConfirmError"></div>
+          </div>
+        </div>
+
+        <button class="cta-button" id="regNext">ДАЛЕЕ</button>
+
+        <div class="footer-link">
+          Уже есть аккаунт? <a href="#" id="toLogin">войти</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function() {
+    'use strict';
+
+    // ===== DOM =====
+    const screenFirst = document.getElementById('screenFirst');
+    const screenLogin = document.getElementById('screenLogin');
+    const screenRegister = document.getElementById('screenRegister');
+
+    const firstCta = document.getElementById('firstCta');
+    const toRegister = document.getElementById('toRegister');
+    const toLogin = document.getElementById('toLogin');
+    const regNext = document.getElementById('regNext');
+
+    // Поля и ошибки регистрации
+    const regEmail = document.getElementById('regEmail');
+    const regPassword = document.getElementById('regPassword');
+    const regConfirm = document.getElementById('regConfirm');
+    const regEmailErr = document.getElementById('regEmailError');
+    const regPassErr = document.getElementById('regPasswordError');
+    const regConfirmErr = document.getElementById('regConfirmError');
+
+    // Поле логина
+    const loginEmail = document.getElementById('loginEmail');
+    const loginEmailErr = document.getElementById('loginEmailError');
+
+    // ===== СОСТОЯНИЕ =====
+    let currentScreen = 'first'; // 'first', 'login', 'register'
+
+    // ===== ОЧИСТКА КЛАССОВ =====
+    function resetClasses() {
+      screenFirst.className = 'screen-slide first';
+      screenLogin.className = 'screen-slide login';
+      screenRegister.className = 'screen-slide register';
+    }
+
+    // ===== ПЕРЕХОД: FIRST → LOGIN (ВЕРТИКАЛЬНЫЙ) =====
+    function goToLoginFromFirst() {
+      resetClasses();
+
+      // Первый уезжает вверх
+      screenFirst.classList.add('hidden');
+
+      // Вход выезжает снизу
+      screenLogin.classList.add('active');
+
+      currentScreen = 'login';
+    }
+
+    // ===== ПЕРЕХОД: FIRST → REGISTER (ВЕРТИКАЛЬНЫЙ) =====
+    function goToRegisterFromFirst() {
+      resetClasses();
+
+      // Первый уезжает вверх
+      screenFirst.classList.add('hidden');
+
+      // Регистрация выезжает снизу
+      screenRegister.classList.add('active');
+
+      currentScreen = 'register';
+    }
+
+    // ===== ПЕРЕХОД: LOGIN ↔ REGISTER (ГОРИЗОНТАЛЬНЫЙ) =====
+    function goToLoginFromRegister() {
+      // Регистрация уезжает влево
+      screenRegister.classList.remove('active');
+      screenRegister.classList.add('to-login');
+
+      // Вход приезжает справа
+      screenLogin.classList.remove('hidden', 'from-register');
+      screenLogin.classList.add('from-register');
+
+      // Через 50ms начинаем анимацию приезда
+      setTimeout(() => {
+        screenLogin.classList.remove('from-register');
+        screenLogin.classList.add('active');
+      }, 50);
+
+      // Через 500ms убираем класс у регистрации
+      setTimeout(() => {
+        screenRegister.classList.remove('to-login');
+        screenRegister.className = 'screen-slide register';
+      }, 500);
+
+      currentScreen = 'login';
+    }
+
+    function goToRegisterFromLogin() {
+      // Вход уезжает вправо
+      screenLogin.classList.remove('active');
+      screenLogin.classList.add('to-register');
+
+      // Регистрация приезжает слева
+      screenRegister.classList.remove('hidden', 'from-login');
+      screenRegister.classList.add('from-login');
+
+      setTimeout(() => {
+        screenRegister.classList.remove('from-login');
+        screenRegister.classList.add('active');
+      }, 50);
+
+      setTimeout(() => {
+        screenLogin.classList.remove('to-register');
+        screenLogin.className = 'screen-slide login';
+      }, 500);
+
+      currentScreen = 'register';
+    }
+
+    // ===== ОБРАБОТЧИКИ =====
+
+    // Кнопка "РАССКАЗАТЬ!" → на логин
+    firstCta.addEventListener('click', function() {
+      goToLoginFromFirst();
+    });
+
+    // "зарегистрироваться" на логине → регистрация (горизонтально)
+    toRegister.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (currentScreen === 'login') {
+        goToRegisterFromLogin();
+      } else {
+        goToRegisterFromFirst();
+      }
+    });
+
+    // "войти" на регистрации → логин (горизонтально)
+    toLogin.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (currentScreen === 'register') {
+        goToLoginFromRegister();
+      } else {
+        goToLoginFromFirst();
+      }
+    });
+
+    // ===== ВАЛИДАЦИЯ РЕГИСТРАЦИИ =====
+
+    function showError(el, msg) {
+      el.textContent = msg;
+      el.classList.add('visible');
+      const input = el.closest('.input-wrapper').querySelector('.input-field');
+      if (input) input.classList.add('error');
+    }
+
+    function hideError(el) {
+      el.classList.remove('visible');
+      const input = el.closest('.input-wrapper').querySelector('.input-field');
+      if (input) input.classList.remove('error');
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function clearRegErrors() {
+      hideError(regEmailErr);
+      hideError(regPassErr);
+      hideError(regConfirmErr);
+    }
+
+    function validateRegister() {
+      clearRegErrors();
+
+      const email = regEmail.value.trim();
+      const pass = regPassword.value.trim();
+      const confirm = regConfirm.value.trim();
+
+      let valid = true;
+
+      if (!email) {
+        showError(regEmailErr, 'Введите email');
+        valid = false;
+      } else if (!isValidEmail(email)) {
+        showError(regEmailErr, 'Некорректный email');
+        valid = false;
+      }
+
+      if (!pass) {
+        showError(regPassErr, 'Придумайте пароль');
+        valid = false;
+      } else if (pass.length < 6) {
+        showError(regPassErr, 'Минимум 6 символов');
+        valid = false;
+      }
+
+      if (!confirm) {
+        showError(regConfirmErr, 'Подтвердите пароль');
+        valid = false;
+      } else if (pass && confirm && pass !== confirm) {
+        showError(regConfirmErr, 'Пароли не совпадают');
+        valid = false;
+      }
+
+      return valid;
+    }
+
+    regNext.addEventListener('click', function() {
+      if (validateRegister()) {
+        alert('✅ Регистрация успешна! Переход на /username');
+      }
+    });
+
+    regEmail.addEventListener('input', () => hideError(regEmailErr));
+    regPassword.addEventListener('input', () => hideError(regPassErr));
+    regConfirm.addEventListener('input', () => hideError(regConfirmErr));
+
+    regEmail.addEventListener('blur', function() {
+      const val = this.value.trim();
+      if (val && !isValidEmail(val)) {
+        showError(regEmailErr, 'Некорректный email');
+      }
+    });
+
+    regConfirm.addEventListener('blur', function() {
+      const pass = regPassword.value.trim();
+      const confirm = this.value.trim();
+      if (pass && confirm && pass !== confirm) {
+        showError(regConfirmErr, 'Пароли не совпадают');
+      }
+    });
+
+    regConfirm.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') regNext.click();
+    });
+
+    // ===== ЛОГИН =====
+    loginEmail.addEventListener('blur', function() {
+      const val = this.value.trim();
+      if (val && !isValidEmail(val)) {
+        showError(loginEmailErr, 'Некорректный email');
+      } else {
+        hideError(loginEmailErr);
+      }
+    });
+    loginEmail.addEventListener('input', () => hideError(loginEmailErr));
+
+    // ===== КНОПКИ СОЦСЕТЕЙ =====
+    document.querySelectorAll('.social-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const provider = this.textContent.trim();
+        alert(`🔐 Вход через ${provider}`);
+        this.style.transform = 'scale(0.94)';
+        setTimeout(() => this.style.transform = '', 150);
+      });
+    });
+
+    // ===== ТИПОГРАФСКИЙ ЭФФЕКТ =====
+    const headline = document.getElementById('headline');
+    const fullText = 'Иногда тебя понимает только тот, кто чувствует то же самое';
+
+    function typeEffect(text, element, speed = 45) {
+      let index = 0;
+      let displayed = '';
+      element.textContent = '';
+
+      function typeChar() {
+        if (index < text.length) {
+          displayed += text.charAt(index);
+          element.textContent = displayed;
+          const cursor = document.createElement('span');
+          cursor.className = 'typewriter-cursor';
+          element.appendChild(cursor);
+          index++;
+          setTimeout(typeChar, speed);
+        } else {
+          const cursor = document.createElement('span');
+          cursor.className = 'typewriter-cursor';
+          element.appendChild(cursor);
+        }
+      }
+      typeChar();
+    }
+
+    setTimeout(() => typeEffect(fullText, headline, 50), 300);
+
+    headline.addEventListener('click', function(e) {
+      e.stopPropagation();
+      typeEffect(fullText, this, 40);
+    });
+
+    // ===== БЛОКИРОВКА СКРОЛЛА =====
+    document.addEventListener('gesturestart', e => e.preventDefault());
+
+    // ===== ИНИЦИАЛИЗАЦИЯ =====
+    resetClasses();
+
+  })();
+</script>
+
+</body>
+</html>      height: 100dvh;
+      background: #ffffff;
+      overflow: hidden;
+      padding: 40px 28px 36px;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    /* ===== ПАПОРОТНИКИ ===== */
+    .fern-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .fern {
+      position: absolute;
+      opacity: 0.22;
+      stroke: #d9d9d9;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .fern-1 {
+      top: -6%;
+      right: -14%;
+      width: 82%;
+      height: 70%;
+      transform: rotate(18deg);
+      opacity: 0.18;
+    }
+    .fern-2 {
+      bottom: -8%;
+      left: -18%;
+      width: 90%;
+      height: 60%;
+      transform: rotate(-12deg);
+      opacity: 0.16;
+    }
+    .fern-3 {
+      top: 28%;
+      left: -12%;
+      width: 50%;
+      height: 40%;
+      transform: rotate(40deg);
+      opacity: 0.13;
+    }
+
+    /* ===== ОБЩИЕ СТИЛИ ===== */
+    .content {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+      padding-bottom: 4%;
+      height: 100%;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 20px;
+      font-weight: 650;
+      letter-spacing: 2px;
+      color: #1e1e1e;
+      user-select: none;
+    }
+    .logo span { color: #2b7a4b; }
+
+    .main-headline {
+      font-size: clamp(26px, 6.5vw, 36px);
+      font-weight: 650;
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+      color: #1e1e1e;
+      margin-bottom: 24px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+    .input-group label {
+      display: block;
+      font-size: 15px;
+      font-weight: 500;
+      color: #1e1e1e;
+      margin-bottom: 6px;
+      letter-spacing: 0.2px;
+    }
+
+    .input-wrapper { position: relative; }
+
+    .input-field {
+      width: 100%;
+      padding: 18px 20px;
+      font-size: 17px;
+      font-family: inherit;
+      color: #1e1e1e;
+      background: #ffffff;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 16px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .input-field:focus {
+      border-color: #2b7a4b;
+      box-shadow: 0 0 0 3px rgba(43, 122, 75, 0.08);
+    }
+    .input-field.error { border-color: #e74c3c; }
+    .input-field::placeholder {
+      color: #b0b0b0;
+      font-weight: 400;
+      letter-spacing: 0.2px;
+    }
+
+    .error-message {
+      display: none;
+      font-size: 13px;
+      color: #e74c3c;
+      margin-top: 6px;
+      padding-left: 4px;
+      animation: shake 0.3s ease;
+    }
+    .error-message.visible { display: block; }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    .cta-button {
+      width: 100%;
+      padding: 18px;
+      margin-top: 12px;
+      background: #2b7a4b;
+      color: #ffffff;
+      border: none;
+      border-radius: 60px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+      box-shadow: 0 6px 24px rgba(43, 122, 75, 0.18);
+      font-family: inherit;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .cta-button:active {
+      transform: scale(0.96);
+      background: #1d5c34;
+    }
+
+    .footer-link {
+      margin-top: auto;
+      text-align: center;
+      font-size: 15px;
+      color: #4a4a4a;
+      font-weight: 420;
+      padding-top: 20px;
+      letter-spacing: 0.2px;
+    }
+    .footer-link a {
+      color: #2b7a4b;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+    .footer-link a:active { border-bottom-color: #2b7a4b; }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 12px 0 28px;
+      color: #b8b8b8;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #e8e8e8;
+    }
+
+    .social-label {
+      font-size: 15px;
+      color: #4a4a4a;
+      margin-bottom: 16px;
+      font-weight: 420;
+      letter-spacing: 0.2px;
+    }
+
+    .social-buttons {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      flex: 1;
+      min-width: 80px;
+      padding: 14px 8px;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 60px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #1e1e1e;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      letter-spacing: 0.3px;
+    }
+    .social-btn svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+    .social-btn:active {
+      transform: scale(0.96);
+      border-color: #2b7a4b;
+      background: #f8faf9;
+    }
+    .social-btn.telegram:hover { border-color: #0088cc; background: #f0f7fc; }
+    .social-btn.google:hover { border-color: #ea4335; background: #fcf0ef; }
+    .social-btn.apple:hover { border-color: #1e1e1e; background: #f5f5f5; }
+
+    /* ===== КОНТЕЙНЕРЫ ЭКРАНОВ ===== */
+    .screen-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .screen-slide {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      padding: 40px 28px 36px;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      background: #ffffff;
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Позиции экранов */
+    .screen-slide.first {
+      transform: translateX(0);
+      z-index: 2;
+    }
+
+    .screen-slide.login {
+      transform: translateX(100%);
+      z-index: 1;
+    }
+
+    .screen-slide.register {
+      transform: translateX(-100%);
+      z-index: 1;
+    }
+
+    /* Активные состояния */
+    .screen-slide.login.active {
+      transform: translateX(0);
+      z-index: 3;
+    }
+
+    .screen-slide.register.active {
+      transform: translateX(0);
+      z-index: 3;
+    }
+
+    .screen-slide.first.hidden {
+      transform: translateX(-100%);
+      z-index: 0;
+    }
+
+    .screen-slide.login.hidden {
+      transform: translateX(100%);
+      z-index: 0;
+    }
+
+    /* Анимация выезда: если регистрация → вход (слева) */
+    .screen-slide.register.to-login {
+      transform: translateX(-100%);
+    }
+
+    .screen-slide.login.from-register {
+      transform: translateX(100%);
+    }
+
+    /* ===== АДАПТИВНОСТЬ ===== */
+    @media (max-width: 420px) {
+      .screen-slide { padding: 32px 20px 28px; }
+      .logo { font-size: 17px; margin-bottom: 32px; }
+      .input-field { padding: 16px 18px; font-size: 16px; }
+      .cta-button { padding: 16px; font-size: 16px; }
+      .social-btn { font-size: 13px; padding: 12px 6px; min-width: 60px; }
+      .social-btn svg { width: 18px; height: 18px; }
+    }
+
+    @media (max-width: 360px) {
+      .screen-slide { padding: 24px 16px 20px; }
+      .main-headline { font-size: 22px; }
+      .input-field { padding: 14px 16px; font-size: 15px; }
+      .cta-button { padding: 14px; font-size: 15px; }
+      .footer-link { font-size: 13px; }
+      .social-btn { font-size: 12px; padding: 10px 4px; min-width: 50px; }
+      .social-btn svg { width: 16px; height: 16px; }
+    }
+
+    /* Desktop центрирование */
+    @media (min-width: 600px) {
+      .app-screen {
+        max-width: 480px;
+        margin: 0 auto;
+        border-radius: 0;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.06);
+      }
+      body {
+        background: #f5f5f7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .screen-slide { padding: 48px 32px 40px; }
+    }
+
+    @media (min-aspect-ratio: 9/16) {
+      .content { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-screen">
+  <!-- Фоновые папоротники (общие для всех экранов) -->
+  <div class="fern-bg" aria-hidden="true">
+    <svg class="fern fern-1" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M150 20 C120 60 80 120 60 180 C50 210 45 240 50 270 C55 300 70 330 90 350 C110 370 130 380 150 380" stroke="#d9d9d9" stroke-width="1.8"/>
+      <path d="M150 20 C180 60 220 120 240 180 C250 210 255 240 250 270 C245 300 230 330 210 350 C190 370 170 380 150 380" stroke="#d9d9d9" stroke-width="1.8"/>
+      <path d="M150 40 C130 80 100 130 85 180 C78 210 75 240 80 270" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M150 40 C170 80 200 130 215 180 C222 210 225 240 220 270" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M150 60 C140 100 125 150 120 200 C118 220 118 240 122 260" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M150 60 C160 100 175 150 180 200 C182 220 182 240 178 260" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M85 180 C75 200 68 220 65 240" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M215 180 C225 200 232 220 235 240" stroke="#d9d9d9" stroke-width="1.2"/>
+    </svg>
+    <svg class="fern fern-2" viewBox="0 0 300 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 380 C60 340 100 280 140 220 C160 190 175 160 185 130 C195 100 200 70 195 40 C190 20 180 10 170 5" stroke="#d9d9d9" stroke-width="1.8"/>
+      <path d="M30 380 C0 340 -40 280 -80 220 C-100 190 -115 160 -125 130 C-135 100 -140 70 -135 40 C-130 20 -120 10 -110 5" stroke="#d9d9d9" stroke-width="1.8"/>
+      <path d="M50 360 C70 320 100 270 130 220 C145 195 155 170 162 145" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M10 360 C-10 320 -40 270 -70 220 C-85 195 -95 170 -102 145" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M70 340 C90 300 115 255 140 210 C150 190 158 170 163 150" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M-10 340 C-30 300 -55 255 -80 210 C-90 190 -98 170 -103 150" stroke="#d9d9d9" stroke-width="1.2"/>
+    </svg>
+    <svg class="fern fern-3" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 280 C40 240 80 180 110 120 C125 90 135 60 138 30 C139 15 135 5 130 0" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M20 280 C0 240 -40 180 -70 120 C-85 90 -95 60 -98 30 C-99 15 -95 5 -90 0" stroke="#d9d9d9" stroke-width="1.5"/>
+      <path d="M30 260 C50 220 80 170 105 120 C115 100 122 80 125 60" stroke="#d9d9d9" stroke-width="1.2"/>
+      <path d="M10 260 C-10 220 -40 170 -65 120 C-75 100 -82 80 -85 60" stroke="#d9d9d9" stroke-width="1.2"/>
+    </svg>
+  </div>
+
+  <!-- КОНТЕЙНЕР ЭКРАНОВ -->
+  <div class="screen-container">
+
+    <!-- ======== ЭКРАН 1: FIRST ======== -->
+    <div class="screen-slide first" id="screenFirst">
+      <div class="content">
+        <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
+
+        <h1 class="main-headline" id="headline">
+          Иногда тебя понимает только тот, кто чувствует то же самое
+          <span class="typewriter-cursor"></span>
+        </h1>
+
+        <p class="sub-headline" style="font-size:clamp(16px,4vw,22px);font-weight:420;line-height:1.4;color:#4a4a4a;margin-bottom:48px;max-width:90%;">
+          Расскажи о себе и найди похожих людей!
+        </p>
+
+        <button class="cta-button" id="firstCta">РАССКАЗАТЬ!</button>
+      </div>
+    </div>
+
+    <!-- ======== ЭКРАН 2: LOGIN ======== -->
+    <div class="screen-slide login" id="screenLogin">
+      <div class="content">
+        <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
+
+        <h1 class="main-headline">Введи почту</h1>
+
+        <div class="input-group">
+          <div class="input-wrapper">
+            <input type="email" class="input-field" id="loginEmail" placeholder="Электронная почта" autocomplete="email" inputmode="email" />
+            <div class="error-message" id="loginEmailError"></div>
+          </div>
+        </div>
+
+        <div class="divider">ИЛИ</div>
+
+        <p class="social-label">Войти с помощью:</p>
+
+        <div class="social-buttons">
+          <button class="social-btn telegram">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            TELEGRAM
+          </button>
+          <button class="social-btn google">
+            <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            GOOGLE
+          </button>
+          <button class="social-btn apple">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            APPLE
+          </button>
+        </div>
+
+        <div class="footer-link">
+          Нет аккаунта? <a href="#" id="toRegister">зарегистрироваться</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======== ЭКРАН 3: REGISTER ======== -->
+    <div class="screen-slide register" id="screenRegister">
+      <div class="content">
+        <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
+
+        <h1 class="main-headline">Введи почту</h1>
+
+        <div class="input-group">
+          <div class="input-wrapper">
+            <input type="email" class="input-field" id="regEmail" placeholder="Электронная почта" autocomplete="email" inputmode="email" />
+            <div class="error-message" id="regEmailError"></div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="regPassword">Придумай пароль</label>
+          <div class="input-wrapper">
+            <input type="password" class="input-field" id="regPassword" placeholder="Пароль" autocomplete="new-password" />
+            <div class="error-message" id="regPasswordError"></div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="regConfirm">Повтори пароль</label>
+          <div class="input-wrapper">
+            <input type="password" class="input-field" id="regConfirm" placeholder="Повторите пароль" autocomplete="new-password" />
+            <div class="error-message" id="regConfirmError"></div>
+          </div>
+        </div>
+
+        <button class="cta-button" id="regNext">ДАЛЕЕ</button>
+
+        <div class="footer-link">
+          Уже есть аккаунт? <a href="#" id="toLogin">войти</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function() {
+    'use strict';
+
+    // ===== DOM =====
+    const screenFirst = document.getElementById('screenFirst');
+    const screenLogin = document.getElementById('screenLogin');
+    const screenRegister = document.getElementById('screenRegister');
+
+    const firstCta = document.getElementById('firstCta');
+    const toRegister = document.getElementById('toRegister');
+    const toLogin = document.getElementById('toLogin');
+    const regNext = document.getElementById('regNext');
+
+    // Поля и ошибки регистрации
+    const regEmail = document.getElementById('regEmail');
+    const regPassword = document.getElementById('regPassword');
+    const regConfirm = document.getElementById('regConfirm');
+    const regEmailErr = document.getElementById('regEmailError');
+    const regPassErr = document.getElementById('regPasswordError');
+    const regConfirmErr = document.getElementById('regConfirmError');
+
+    // Поле логина
+    const loginEmail = document.getElementById('loginEmail');
+    const loginEmailErr = document.getElementById('loginEmailError');
+
+    // ===== СОСТОЯНИЕ =====
+    let currentScreen = 'first'; // 'first', 'login', 'register'
+
+    // ===== ФУНКЦИИ ПЕРЕХОДОВ =====
+
+    // Переход на экран входа (слева направо)
+    function goToLogin(fromRegister = false) {
+      const isFromRegister = fromRegister || currentScreen === 'register';
+
+      // Сбрасываем все классы
+      screenFirst.classList.remove('hidden', 'active');
+      screenLogin.classList.remove('hidden', 'active', 'from-register');
+      screenRegister.classList.remove('hidden', 'active', 'to-login');
+
+      if (isFromRegister) {
+        // Регистрация → Вход: регистрация уезжает влево, вход приезжает справа
+        screenRegister.classList.add('to-login');
+        screenLogin.classList.add('from-register');
+
+        // Анимация: регистрация уезжает
+        setTimeout(() => {
+          screenRegister.classList.remove('to-login');
+          screenRegister.classList.add('hidden');
+        }, 450);
+
+        // Анимация: вход приезжает
+        setTimeout(() => {
+          screenLogin.classList.remove('from-register');
+          screenLogin.classList.add('active');
+        }, 50);
+
+        screenFirst.classList.add('hidden');
+
+      } else {
+        // Первый → Вход: первый уезжает влево, вход приезжает справа
+        screenFirst.classList.add('hidden');
+        screenLogin.classList.add('active');
+        screenRegister.classList.add('hidden');
+      }
+
+      currentScreen = 'login';
+    }
+
+    // Переход на экран регистрации (справа налево)
+    function goToRegister() {
+      // Сбрасываем классы
+      screenFirst.classList.remove('hidden', 'active');
+      screenLogin.classList.remove('hidden', 'active', 'from-register');
+      screenRegister.classList.remove('hidden', 'active', 'to-login');
+
+      // Первый → Регистрация: первый уезжает влево, регистрация приезжает справа
+      screenFirst.classList.add('hidden');
+      screenRegister.classList.add('active');
+      screenLogin.classList.add('hidden');
+
+      currentScreen = 'register';
+    }
+
+    // Переход на первый экран
+    function goToFirst() {
+      screenFirst.classList.remove('hidden');
+      screenLogin.classList.remove('active', 'from-register');
+      screenRegister.classList.remove('active', 'to-login');
+
+      screenLogin.classList.add('hidden');
+      screenRegister.classList.add('hidden');
+
+      currentScreen = 'first';
+    }
+
+    // ===== ОБРАБОТЧИКИ КНОПОК =====
+
+    // Кнопка "РАССКАЗАТЬ!" → на логин
+    firstCta.addEventListener('click', function() {
+      goToLogin(false);
+    });
+
+    // "зарегистрироваться" на экране логина → на регистрацию
+    toRegister.addEventListener('click', function(e) {
+      e.preventDefault();
+      goToRegister();
+    });
+
+    // "войти" на экране регистрации → на логин
+    toLogin.addEventListener('click', function(e) {
+      e.preventDefault();
+      goToLogin(true);
+    });
+
+    // ===== ВАЛИДАЦИЯ РЕГИСТРАЦИИ =====
+
+    function showError(el, msg) {
+      el.textContent = msg;
+      el.classList.add('visible');
+      const input = el.closest('.input-wrapper').querySelector('.input-field');
+      if (input) input.classList.add('error');
+    }
+
+    function hideError(el) {
+      el.classList.remove('visible');
+      const input = el.closest('.input-wrapper').querySelector('.input-field');
+      if (input) input.classList.remove('error');
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function clearRegErrors() {
+      hideError(regEmailErr);
+      hideError(regPassErr);
+      hideError(regConfirmErr);
+    }
+
+    function validateRegister() {
+      clearRegErrors();
+
+      const email = regEmail.value.trim();
+      const pass = regPassword.value.trim();
+      const confirm = regConfirm.value.trim();
+
+      let valid = true;
+
+      if (!email) {
+        showError(regEmailErr, 'Введите email');
+        valid = false;
+      } else if (!isValidEmail(email)) {
+        showError(regEmailErr, 'Некорректный email');
+        valid = false;
+      }
+
+      if (!pass) {
+        showError(regPassErr, 'Придумайте пароль');
+        valid = false;
+      } else if (pass.length < 6) {
+        showError(regPassErr, 'Минимум 6 символов');
+        valid = false;
+      }
+
+      if (!confirm) {
+        showError(regConfirmErr, 'Подтвердите пароль');
+        valid = false;
+      } else if (pass && confirm && pass !== confirm) {
+        showError(regConfirmErr, 'Пароли не совпадают');
+        valid = false;
+      }
+
+      return valid;
+    }
+
+    regNext.addEventListener('click', function() {
+      if (validateRegister()) {
+        // Успех — переход на username
+        alert('✅ Регистрация успешна! Переход на /username');
+        // В реальном приложении: window.location.href = '/username';
+      }
+    });
+
+    // Очистка ошибок при вводе
+    regEmail.addEventListener('input', () => hideError(regEmailErr));
+    regPassword.addEventListener('input', () => hideError(regPassErr));
+    regConfirm.addEventListener('input', () => hideError(regConfirmErr));
+
+    // Валидация на blur
+    regEmail.addEventListener('blur', function() {
+      const val = this.value.trim();
+      if (val && !isValidEmail(val)) {
+        showError(regEmailErr, 'Некорректный email');
+      }
+    });
+
+    regConfirm.addEventListener('blur', function() {
+      const pass = regPassword.value.trim();
+      const confirm = this.value.trim();
+      if (pass && confirm && pass !== confirm) {
+        showError(regConfirmErr, 'Пароли не совпадают');
+      }
+    });
+
+    // Enter на поле подтверждения
+    regConfirm.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') regNext.click();
+    });
+
+    // ===== ЛОГИКА ЛОГИНА =====
+
+    loginEmail.addEventListener('blur', function() {
+      const val = this.value.trim();
+      if (val && !isValidEmail(val)) {
+        showError(loginEmailErr, 'Некорректный email');
+      } else {
+        hideError(loginEmailErr);
+      }
+    });
+
+    loginEmail.addEventListener('input', () => hideError(loginEmailErr));
+
+    // Кнопки соцсетей
+    document.querySelectorAll('.social-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const provider = this.textContent.trim();
+        alert(`🔐 Вход через ${provider}`);
+        this.style.transform = 'scale(0.94)';
+        setTimeout(() => this.style.transform = '', 150);
+      });
+    });
+
+    // ===== ТИПОГРАФСКИЙ ЭФФЕКТ ДЛЯ ПЕРВОГО ЭКРАНА =====
+
+    const headline = document.getElementById('headline');
+    const fullText = 'Иногда тебя понимает только тот, кто чувствует то же самое';
+
+    function typeEffect(text, element, speed = 45) {
+      let index = 0;
+      let displayed = '';
+      element.textContent = '';
+
+      function typeChar() {
+        if (index < text.length) {
+          displayed += text.charAt(index);
+          element.textContent = displayed;
+          const cursor = document.createElement('span');
+          cursor.className = 'typewriter-cursor';
+          element.appendChild(cursor);
+          index++;
+          setTimeout(typeChar, speed);
+        } else {
+          const cursor = document.createElement('span');
+          cursor.className = 'typewriter-cursor';
+          element.appendChild(cursor);
+        }
+      }
+      typeChar();
+    }
+
+    // Запуск печати при загрузке
+    setTimeout(() => typeEffect(fullText, headline, 50), 300);
+
+    // Перепечатывание по клику
+    headline.addEventListener('click', function(e) {
+      e.stopPropagation();
+      typeEffect(fullText, this, 40);
+    });
+
+    // ===== БЛОКИРОВКА СКРОЛЛА =====
+    document.addEventListener('gesturestart', e => e.preventDefault());
+
+    // ===== ИНИЦИАЛИЗАЦИЯ: ПОКАЗЫВАЕМ ПЕРВЫЙ ЭКРАН =====
+    goToFirst();
+
+  })();
+</script>
+
+</body>
+</html>
