@@ -6,7 +6,6 @@
   <title>Ты не один</title>
   <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet" />
   <style>
-    /* ===== БАЗА ===== */
     * {
       margin: 0;
       padding: 0;
@@ -38,17 +37,26 @@
       height: 100dvh;
       background: #ffffff;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
       padding: 40px 28px 36px;
       padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
     }
 
-    /* ===== ФОНОВЫЕ ПАПОРОТНИКИ ===== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== ПАПОРОТНИКИ (нижний правый угол) ===== */
     .fern-bg {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      bottom: 0;
+      right: 0;
+      width: 70%;
+      height: 70%;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
@@ -62,33 +70,25 @@
       stroke-linejoin: round;
     }
 
-    /* ============================================================
-       ПАПОРОТНИК 1 — БОЛЬШОЙ (ПРАВЫЙ ВЕРХНИЙ)
-       Начинается от правого края, уходит вверх и влево
-    ============================================================ */
     .fern-1 {
-      top: -4%;
-      right: -2%;
-      width: 65%;
-      height: 75%;
-      transform: rotate(8deg);
-      opacity: 0.55;
-    }
-
-    /* ============================================================
-       ПАПОРОТНИК 2 — МАЛЕНЬКИЙ (ПРАВЫЙ НИЖНИЙ)
-       Начинается от правого края, уходит вниз и влево
-    ============================================================ */
-    .fern-2 {
-      bottom: -4%;
-      right: -2%;
-      width: 45%;
-      height: 50%;
-      transform: rotate(-6deg);
+      bottom: 0%;
+      right: 0%;
+      width: 55%;
+      height: 60%;
+      transform: rotate(-4deg);
       opacity: 0.45;
     }
 
-    /* ===== ОБЩИЕ СТИЛИ ===== */
+    .fern-2 {
+      bottom: 0%;
+      right: -2%;
+      width: 38%;
+      height: 45%;
+      transform: rotate(8deg);
+      opacity: 0.35;
+    }
+
+    /* ===== КОНТЕНТ ===== */
     .content {
       position: relative;
       z-index: 1;
@@ -98,7 +98,6 @@
       justify-content: center;
       min-height: 0;
       padding-bottom: 4%;
-      height: 100%;
     }
 
     .logo {
@@ -125,28 +124,6 @@
       font-variation-settings: 'wght' 700;
     }
 
-    .page-title {
-      font-size: clamp(26px, 6.5vw, 36px);
-      font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.3px;
-      color: #1e1e1e;
-      margin-bottom: 24px;
-      font-family: 'Inconsolata', monospace;
-      font-variation-settings: 'wght' 700;
-    }
-
-    .sub-title {
-      font-size: clamp(20px, 5vw, 28px);
-      font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: -0.2px;
-      color: #1e1e1e;
-      margin-bottom: 20px;
-      font-family: 'Inconsolata', monospace;
-      font-variation-settings: 'wght' 400;
-    }
-
     .sub-headline {
       font-size: clamp(16px, 4vw, 22px);
       font-weight: 400;
@@ -158,72 +135,10 @@
       font-variation-settings: 'wght' 400;
     }
 
-    .input-group {
-      margin-bottom: 20px;
-    }
-    .input-group label {
-      display: block;
-      font-size: 15px;
-      font-weight: 500;
-      color: #1e1e1e;
-      margin-bottom: 6px;
-      letter-spacing: 0.2px;
-      font-family: 'Inconsolata', monospace;
-      font-variation-settings: 'wght' 500;
-    }
-
-    .input-wrapper { position: relative; }
-
-    .input-field {
-      width: 100%;
-      padding: 18px 20px;
-      font-size: 17px;
-      font-family: 'Inconsolata', monospace;
-      font-variation-settings: 'wght' 400;
-      color: #1e1e1e;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(4px);
-      border: 1.5px solid #e0e0e0;
-      border-radius: 16px;
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-
-    .input-field:focus {
-      border-color: #2b7a4b;
-      box-shadow: 0 0 0 3px rgba(43, 122, 75, 0.08);
-    }
-    .input-field.error { border-color: #e74c3c; }
-    .input-field::placeholder {
-      color: #b0b0b0;
-      font-weight: 400;
-      letter-spacing: 0.2px;
-    }
-
-    .error-message {
-      display: none;
-      font-size: 13px;
-      color: #e74c3c;
-      margin-top: 6px;
-      padding-left: 4px;
-      animation: shake 0.3s ease;
-      font-family: 'Inconsolata', monospace;
-      font-variation-settings: 'wght' 400;
-    }
-    .error-message.visible { display: block; }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-6px); }
-      75% { transform: translateX(6px); }
-    }
-
     .cta-button {
       width: 100%;
+      max-width: 360px;
       padding: 18px;
-      margin-top: 12px;
       background: #2b7a4b;
       color: #ffffff;
       border: none;
@@ -239,6 +154,7 @@
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
     }
+
     .cta-button:active {
       transform: scale(0.96);
       background: #1d5c34;
@@ -264,81 +180,9 @@
       transition: border-color 0.2s ease;
       font-variation-settings: 'wght' 500;
     }
-    .footer-link a:active { border-bottom-color: #2b7a4b; }
-
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin: 12px 0 28px;
-      color: #b8b8b8;
-      font-size: 14px;
-      font-weight: 400;
-      letter-spacing: 0.5px;
-      font-family: 'Inconsolata', monospace;
-      font-variation-settings: 'wght' 400;
+    .footer-link a:active {
+      border-bottom-color: #2b7a4b;
     }
-    .divider::before,
-    .divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: #e8e8e8;
-    }
-
-    .social-label {
-      font-size: 15px;
-      color: #4a4a4a;
-      margin-bottom: 16px;
-      font-weight: 400;
-      letter-spacing: 0.2px;
-      font-family: 'Inconsolata', monospace;
-      font-variation-settings: 'wght' 400;
-    }
-
-    .social-buttons {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-    }
-
-    .social-btn {
-      flex: 1;
-      min-width: 80px;
-      padding: 14px 8px;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(4px);
-      border: 1px solid #e0e0e0;
-      border-radius: 60px;
-      font-size: 14px;
-      font-weight: 500;
-      color: #1e1e1e;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-family: 'Inconsolata', monospace;
-      font-variation-settings: 'wght' 500;
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-      letter-spacing: 0.3px;
-    }
-    .social-btn svg {
-      width: 20px;
-      height: 20px;
-      flex-shrink: 0;
-    }
-    .social-btn:active {
-      transform: scale(0.96);
-      border-color: #2b7a4b;
-      background: #f8faf9;
-    }
-    .social-btn.telegram:hover { border-color: #0088cc; background: #f0f7fc; }
-    .social-btn.google:hover { border-color: #ea4335; background: #fcf0ef; }
-    .social-btn.apple:hover { border-color: #1e1e1e; background: #f5f5f5; }
 
     /* ===== ТИПОГРАФСКИЙ КУРСОР ===== */
     .typewriter-cursor {
@@ -355,114 +199,18 @@
       50% { opacity: 0; }
     }
 
-    /* ===== КОНТЕЙНЕР ЭКРАНОВ ===== */
-    .screen-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-
-    .screen-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      padding: 40px 28px 36px;
-      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-      background: transparent;
-      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
-      will-change: transform, opacity;
-      display: flex;
-      flex-direction: column;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      z-index: 1;
-    }
-
-    .screen-slide.first {
-      transform: translateY(0);
-      opacity: 1;
-      z-index: 2;
-    }
-
-    .screen-slide.login {
-      transform: translateY(100%);
-      opacity: 0;
-      z-index: 1;
-    }
-
-    .screen-slide.register {
-      transform: translateY(100%);
-      opacity: 0;
-      z-index: 1;
-    }
-
-    .screen-slide.login.active {
-      transform: translateY(0);
-      opacity: 1;
-      z-index: 3;
-    }
-
-    .screen-slide.register.active {
-      transform: translateY(0);
-      opacity: 1;
-      z-index: 3;
-    }
-
-    .screen-slide.first.hidden {
-      transform: translateY(-100%);
-      opacity: 0;
-      z-index: 0;
-    }
-
-    .screen-slide.register.to-login {
-      transform: translateX(-100%);
-      opacity: 0;
-      z-index: 1;
-    }
-
-    .screen-slide.login.from-register {
-      transform: translateX(100%);
-      opacity: 0;
-      z-index: 1;
-    }
-
-    .screen-slide.login.to-register {
-      transform: translateX(100%);
-      opacity: 0;
-      z-index: 1;
-    }
-
-    .screen-slide.register.from-login {
-      transform: translateX(-100%);
-      opacity: 0;
-      z-index: 1;
-    }
-
     /* ===== АДАПТИВНОСТЬ ===== */
     @media (max-width: 420px) {
-      .screen-slide { padding: 32px 20px 28px; }
+      .app-screen { padding: 32px 20px 28px; }
       .logo { font-size: 17px; margin-bottom: 32px; }
-      .input-field { padding: 16px 18px; font-size: 16px; }
-      .cta-button { padding: 16px; font-size: 16px; }
-      .social-btn { font-size: 13px; padding: 12px 6px; min-width: 60px; }
-      .social-btn svg { width: 18px; height: 18px; }
-      .page-title { font-size: 22px; }
-      .sub-title { font-size: 18px; }
+      .cta-button { padding: 16px; font-size: 16px; max-width: 100%; }
     }
 
     @media (max-width: 360px) {
-      .screen-slide { padding: 24px 16px 20px; }
+      .app-screen { padding: 24px 16px 20px; }
       .main-headline { font-size: 22px; }
-      .page-title { font-size: 20px; }
-      .sub-title { font-size: 16px; }
-      .input-field { padding: 14px 16px; font-size: 15px; }
+      .sub-headline { font-size: 16px; }
       .cta-button { padding: 14px; font-size: 15px; }
-      .footer-link { font-size: 13px; }
-      .social-btn { font-size: 12px; padding: 10px 4px; min-width: 50px; }
-      .social-btn svg { width: 16px; height: 16px; }
     }
 
     @media (min-width: 600px) {
@@ -478,202 +226,62 @@
         align-items: center;
         justify-content: center;
       }
-      .screen-slide { padding: 48px 32px 40px; }
-    }
-
-    @media (min-aspect-ratio: 9/16) {
-      .content { justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-<div class="app-screen">
-  <!-- ============================================================
-       ФОНОВЫЕ ПАПОРОТНИКИ (ДВА, С ПРАВОГО КРАЯ)
-  ============================================================ -->
+<div class="app-screen" id="appScreen">
+
+  <!-- Папоротники -->
   <div class="fern-bg" aria-hidden="true">
-
-    <!-- ПАПОРОТНИК 1 — БОЛЬШОЙ (правый верхний) -->
-    <svg class="fern fern-1" viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Стебель — начинается от правого края, уходит вверх-влево -->
-      <path d="M480 300 C450 250 400 180 340 120 C290 70 240 30 200 10 C180 0 165 -5 155 -8" stroke="#e5e7e5" stroke-width="2.2"/>
-
-      <!-- ЛИСТЬЯ (8 пар, асимметричные) -->
-
-      <!-- Пара 1 (самая нижняя, у основания) -->
-      <path d="M440 270 C420 280 400 290 385 300" stroke="#e5e7e5" stroke-width="1.8"/>
-      <path d="M440 270 C460 280 480 290 495 300" stroke="#e5e7e5" stroke-width="1.8"/>
-
-      <!-- Пара 2 -->
-      <path d="M400 220 C380 230 360 240 345 250" stroke="#e5e7e5" stroke-width="1.6"/>
-      <path d="M400 220 C420 230 440 240 455 250" stroke="#e5e7e5" stroke-width="1.6"/>
-
-      <!-- Пара 3 -->
-      <path d="M360 170 C342 178 325 185 312 195" stroke="#e5e7e5" stroke-width="1.4"/>
-      <path d="M360 170 C378 178 395 185 408 195" stroke="#e5e7e5" stroke-width="1.4"/>
-
-      <!-- Пара 4 -->
-      <path d="M320 125 C305 132 290 138 280 148" stroke="#e5e7e5" stroke-width="1.2"/>
-      <path d="M320 125 C335 132 350 138 360 148" stroke="#e5e7e5" stroke-width="1.2"/>
-
-      <!-- Пара 5 -->
-      <path d="M285 85 C273 92 260 98 252 108" stroke="#e5e7e5" stroke-width="1.1"/>
-      <path d="M285 85 C297 92 310 98 318 108" stroke="#e5e7e5" stroke-width="1.1"/>
-
-      <!-- Пара 6 -->
-      <path d="M255 50 C245 56 235 62 230 72" stroke="#e5e7e5" stroke-width="1.0"/>
-      <path d="M255 50 C265 56 275 62 280 72" stroke="#e5e7e5" stroke-width="1.0"/>
-
-      <!-- Пара 7 (ближе к кончику) -->
-      <path d="M230 25 C222 30 215 35 210 42" stroke="#e5e7e5" stroke-width="0.9"/>
-      <path d="M230 25 C238 30 245 35 250 42" stroke="#e5e7e5" stroke-width="0.9"/>
-
-      <!-- Пара 8 (самый кончик) -->
-      <path d="M210 10 C205 13 200 16 197 20" stroke="#e5e7e5" stroke-width="0.8"/>
-      <path d="M210 10 C215 13 220 16 223 20" stroke="#e5e7e5" stroke-width="0.8"/>
-
-      <!-- Завиток на конце -->
-      <path d="M155 -8 C145 -15 135 -18 128 -14 C122 -10 125 -3 130 0" stroke="#e5e7e5" stroke-width="1.2"/>
+    <svg class="fern fern-1" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M380 390 C350 340 300 270 250 210 C210 160 175 120 155 85 C145 68 138 55 135 42" stroke="#e5e7e5" stroke-width="2.2"/>
+      <path d="M300 270 C280 280 260 290 245 300" stroke="#e5e7e5" stroke-width="1.6"/>
+      <path d="M300 270 C320 280 340 290 355 300" stroke="#e5e7e5" stroke-width="1.6"/>
+      <path d="M260 220 C242 228 225 235 212 245" stroke="#e5e7e5" stroke-width="1.4"/>
+      <path d="M260 220 C278 228 295 235 308 245" stroke="#e5e7e5" stroke-width="1.4"/>
+      <path d="M225 175 C210 182 195 188 185 198" stroke="#e5e7e5" stroke-width="1.2"/>
+      <path d="M225 175 C240 182 255 188 265 198" stroke="#e5e7e5" stroke-width="1.2"/>
+      <path d="M195 140 C183 146 172 152 165 162" stroke="#e5e7e5" stroke-width="1.0"/>
+      <path d="M195 140 C207 146 218 152 225 162" stroke="#e5e7e5" stroke-width="1.0"/>
+      <path d="M170 110 C160 115 152 120 148 128" stroke="#e5e7e5" stroke-width="0.9"/>
+      <path d="M170 110 C180 115 188 120 192 128" stroke="#e5e7e5" stroke-width="0.9"/>
+      <path d="M135 42 C125 48 118 52 115 58" stroke="#e5e7e5" stroke-width="0.8"/>
+      <path d="M135 42 C145 48 152 52 155 58" stroke="#e5e7e5" stroke-width="0.8"/>
     </svg>
 
-    <!-- ПАПОРОТНИК 2 — МАЛЕНЬКИЙ (правый нижний) -->
-    <svg class="fern fern-2" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Стебель — начинается от правого края, уходит вниз-влево -->
-      <path d="M380 100 C350 150 300 210 250 260 C210 300 175 330 150 350 C135 360 125 368 118 372" stroke="#e5e7e5" stroke-width="2.0"/>
-
-      <!-- ЛИСТЬЯ (6 пар, асимметричные) -->
-
-      <!-- Пара 1 -->
-      <path d="M340 160 C320 170 300 180 285 190" stroke="#e5e7e5" stroke-width="1.6"/>
-      <path d="M340 160 C360 170 380 180 395 190" stroke="#e5e7e5" stroke-width="1.6"/>
-
-      <!-- Пара 2 -->
-      <path d="M300 210 C282 218 265 225 252 235" stroke="#e5e7e5" stroke-width="1.4"/>
-      <path d="M300 210 C318 218 335 225 348 235" stroke="#e5e7e5" stroke-width="1.4"/>
-
-      <!-- Пара 3 -->
-      <path d="M260 258 C245 265 230 272 220 282" stroke="#e5e7e5" stroke-width="1.2"/>
-      <path d="M260 258 C275 265 290 272 300 282" stroke="#e5e7e5" stroke-width="1.2"/>
-
-      <!-- Пара 4 -->
-      <path d="M225 298 C212 305 200 312 192 322" stroke="#e5e7e5" stroke-width="1.1"/>
-      <path d="M225 298 C238 305 250 312 258 322" stroke="#e5e7e5" stroke-width="1.1"/>
-
-      <!-- Пара 5 -->
-      <path d="M190 332 C180 338 170 345 165 355" stroke="#e5e7e5" stroke-width="1.0"/>
-      <path d="M190 332 C200 338 210 345 215 355" stroke="#e5e7e5" stroke-width="1.0"/>
-
-      <!-- Пара 6 (самая нижняя) -->
-      <path d="M160 358 C152 363 145 368 140 375" stroke="#e5e7e5" stroke-width="0.9"/>
-      <path d="M160 358 C168 363 175 368 180 375" stroke="#e5e7e5" stroke-width="0.9"/>
-
-      <!-- Завиток на конце -->
-      <path d="M118 372 C108 378 100 380 95 376 C90 372 93 365 98 362" stroke="#e5e7e5" stroke-width="1.0"/>
+    <svg class="fern fern-2" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M280 290 C260 250 230 200 200 160 C178 130 160 105 150 85 C145 75 142 68 140 60" stroke="#e5e7e5" stroke-width="2.0"/>
+      <path d="M230 200 C215 208 200 215 190 225" stroke="#e5e7e5" stroke-width="1.4"/>
+      <path d="M230 200 C245 208 260 215 270 225" stroke="#e5e7e5" stroke-width="1.4"/>
+      <path d="M200 160 C188 168 175 175 168 185" stroke="#e5e7e5" stroke-width="1.2"/>
+      <path d="M200 160 C212 168 225 175 232 185" stroke="#e5e7e5" stroke-width="1.2"/>
+      <path d="M170 130 C160 136 152 142 148 150" stroke="#e5e7e5" stroke-width="1.0"/>
+      <path d="M170 130 C180 136 188 142 192 150" stroke="#e5e7e5" stroke-width="1.0"/>
+      <path d="M150 105 C142 110 136 115 133 122" stroke="#e5e7e5" stroke-width="0.8"/>
+      <path d="M150 105 C158 110 164 115 167 122" stroke="#e5e7e5" stroke-width="0.8"/>
     </svg>
-
   </div>
 
-  <!-- КОНТЕЙНЕР ЭКРАНОВ -->
-  <div class="screen-container">
+  <!-- ===== КОНТЕНТ ===== -->
+  <div class="content">
 
-    <!-- ======== ЭКРАН 1: FIRST ======== -->
-    <div class="screen-slide first" id="screenFirst">
-      <div class="content">
-        <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
+    <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
 
-        <h1 class="main-headline" id="headline">
-          Иногда тебя понимает только тот, кто чувствует то же самое
-          <span class="typewriter-cursor"></span>
-        </h1>
+    <h1 class="main-headline" id="headline">
+      Иногда тебя понимает только тот, кто чувствует то же самое
+      <span class="typewriter-cursor"></span>
+    </h1>
 
-        <p class="sub-headline">
-          Расскажи о себе и найди похожих людей!
-        </p>
+    <p class="sub-headline">
+      Расскажи о себе и найди похожих людей!
+    </p>
 
-        <button class="cta-button" id="firstCta">РАССКАЗАТЬ!</button>
-      </div>
-    </div>
+    <button class="cta-button" id="firstCta">РАССКАЗАТЬ!</button>
 
-    <!-- ======== ЭКРАН 2: LOGIN ======== -->
-    <div class="screen-slide login" id="screenLogin">
-      <div class="content">
-        <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
-
-        <h1 class="page-title">Вход</h1>
-
-        <p class="sub-title">Введи почту</p>
-
-        <div class="input-group">
-          <div class="input-wrapper">
-            <input type="email" class="input-field" id="loginEmail" placeholder="Электронная почта" autocomplete="email" inputmode="email" />
-            <div class="error-message" id="loginEmailError"></div>
-          </div>
-        </div>
-
-        <div class="divider">ИЛИ</div>
-
-        <p class="social-label">Войти с помощью:</p>
-
-        <div class="social-buttons">
-          <button class="social-btn telegram">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-            TELEGRAM
-          </button>
-          <button class="social-btn google">
-            <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-            GOOGLE
-          </button>
-          <button class="social-btn apple">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            APPLE
-          </button>
-        </div>
-
-        <div class="footer-link">
-          Нет аккаунта? <a href="#" id="toRegister">зарегистрироваться</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ======== ЭКРАН 3: REGISTER ======== -->
-    <div class="screen-slide register" id="screenRegister">
-      <div class="content">
-        <div class="logo"><span>{</span>LOGOTYPE<span>}</span></div>
-
-        <h1 class="page-title">Регистрация</h1>
-
-        <p class="sub-title">Введи почту</p>
-
-        <div class="input-group">
-          <div class="input-wrapper">
-            <input type="email" class="input-field" id="regEmail" placeholder="Электронная почта" autocomplete="email" inputmode="email" />
-            <div class="error-message" id="regEmailError"></div>
-          </div>
-        </div>
-
-        <div class="input-group">
-          <label for="regPassword">Придумай пароль</label>
-          <div class="input-wrapper">
-            <input type="password" class="input-field" id="regPassword" placeholder="Пароль" autocomplete="new-password" />
-            <div class="error-message" id="regPasswordError"></div>
-          </div>
-        </div>
-
-        <div class="input-group">
-          <label for="regConfirm">Повтори пароль</label>
-          <div class="input-wrapper">
-            <input type="password" class="input-field" id="regConfirm" placeholder="Повторите пароль" autocomplete="new-password" />
-            <div class="error-message" id="regConfirmError"></div>
-          </div>
-        </div>
-
-        <button class="cta-button" id="regNext">ДАЛЕЕ</button>
-
-        <div class="footer-link">
-          Уже есть аккаунт? <a href="#" id="toLogin">войти</a>
-        </div>
-      </div>
+    <div class="footer-link">
+      <a href="#" id="loginLink">Уже есть аккаунт?</a>
     </div>
 
   </div>
@@ -681,230 +289,11 @@
 
 <script>
   (function() {
-    'use strict';
-
-    // ===== DOM =====
-    const screenFirst = document.getElementById('screenFirst');
-    const screenLogin = document.getElementById('screenLogin');
-    const screenRegister = document.getElementById('screenRegister');
-
+    const appScreen = document.getElementById('appScreen');
     const firstCta = document.getElementById('firstCta');
-    const toRegister = document.getElementById('toRegister');
-    const toLogin = document.getElementById('toLogin');
-    const regNext = document.getElementById('regNext');
+    const loginLink = document.getElementById('loginLink');
 
-    // Поля и ошибки регистрации
-    const regEmail = document.getElementById('regEmail');
-    const regPassword = document.getElementById('regPassword');
-    const regConfirm = document.getElementById('regConfirm');
-    const regEmailErr = document.getElementById('regEmailError');
-    const regPassErr = document.getElementById('regPasswordError');
-    const regConfirmErr = document.getElementById('regConfirmError');
-
-    // Поле логина
-    const loginEmail = document.getElementById('loginEmail');
-    const loginEmailErr = document.getElementById('loginEmailError');
-
-    // ===== СОСТОЯНИЕ =====
-    let currentScreen = 'first';
-
-    // ===== ОЧИСТКА КЛАССОВ =====
-    function resetClasses() {
-      screenFirst.className = 'screen-slide first';
-      screenLogin.className = 'screen-slide login';
-      screenRegister.className = 'screen-slide register';
-    }
-
-    // ===== ПЕРЕХОД: FIRST → LOGIN (ВЕРТИКАЛЬНЫЙ) =====
-    function goToLoginFromFirst() {
-      resetClasses();
-      screenFirst.classList.add('hidden');
-      screenLogin.classList.add('active');
-      currentScreen = 'login';
-    }
-
-    // ===== ПЕРЕХОД: FIRST → REGISTER (ВЕРТИКАЛЬНЫЙ) =====
-    function goToRegisterFromFirst() {
-      resetClasses();
-      screenFirst.classList.add('hidden');
-      screenRegister.classList.add('active');
-      currentScreen = 'register';
-    }
-
-    // ===== ПЕРЕХОД: LOGIN ↔ REGISTER (ГОРИЗОНТАЛЬНЫЙ) =====
-    function goToLoginFromRegister() {
-      screenRegister.classList.remove('active');
-      screenRegister.classList.add('to-login');
-      screenLogin.classList.remove('hidden', 'from-register');
-      screenLogin.classList.add('from-register');
-
-      setTimeout(() => {
-        screenLogin.classList.remove('from-register');
-        screenLogin.classList.add('active');
-      }, 50);
-
-      setTimeout(() => {
-        screenRegister.classList.remove('to-login');
-        screenRegister.className = 'screen-slide register';
-      }, 500);
-
-      currentScreen = 'login';
-    }
-
-    function goToRegisterFromLogin() {
-      screenLogin.classList.remove('active');
-      screenLogin.classList.add('to-register');
-      screenRegister.classList.remove('hidden', 'from-login');
-      screenRegister.classList.add('from-login');
-
-      setTimeout(() => {
-        screenRegister.classList.remove('from-login');
-        screenRegister.classList.add('active');
-      }, 50);
-
-      setTimeout(() => {
-        screenLogin.classList.remove('to-register');
-        screenLogin.className = 'screen-slide login';
-      }, 500);
-
-      currentScreen = 'register';
-    }
-
-    // ===== ОБРАБОТЧИКИ =====
-    firstCta.addEventListener('click', function() {
-      goToLoginFromFirst();
-    });
-
-    toRegister.addEventListener('click', function(e) {
-      e.preventDefault();
-      if (currentScreen === 'login') {
-        goToRegisterFromLogin();
-      } else {
-        goToRegisterFromFirst();
-      }
-    });
-
-    toLogin.addEventListener('click', function(e) {
-      e.preventDefault();
-      if (currentScreen === 'register') {
-        goToLoginFromRegister();
-      } else {
-        goToLoginFromFirst();
-      }
-    });
-
-    // ===== ВАЛИДАЦИЯ РЕГИСТРАЦИИ =====
-
-    function showError(el, msg) {
-      el.textContent = msg;
-      el.classList.add('visible');
-      const input = el.closest('.input-wrapper').querySelector('.input-field');
-      if (input) input.classList.add('error');
-    }
-
-    function hideError(el) {
-      el.classList.remove('visible');
-      const input = el.closest('.input-wrapper').querySelector('.input-field');
-      if (input) input.classList.remove('error');
-    }
-
-    function isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    function clearRegErrors() {
-      hideError(regEmailErr);
-      hideError(regPassErr);
-      hideError(regConfirmErr);
-    }
-
-    function validateRegister() {
-      clearRegErrors();
-
-      const email = regEmail.value.trim();
-      const pass = regPassword.value.trim();
-      const confirm = regConfirm.value.trim();
-
-      let valid = true;
-
-      if (!email) {
-        showError(regEmailErr, 'Введите email');
-        valid = false;
-      } else if (!isValidEmail(email)) {
-        showError(regEmailErr, 'Некорректный email');
-        valid = false;
-      }
-
-      if (!pass) {
-        showError(regPassErr, 'Придумайте пароль');
-        valid = false;
-      } else if (pass.length < 6) {
-        showError(regPassErr, 'Минимум 6 символов');
-        valid = false;
-      }
-
-      if (!confirm) {
-        showError(regConfirmErr, 'Подтвердите пароль');
-        valid = false;
-      } else if (pass && confirm && pass !== confirm) {
-        showError(regConfirmErr, 'Пароли не совпадают');
-        valid = false;
-      }
-
-      return valid;
-    }
-
-    regNext.addEventListener('click', function() {
-      if (validateRegister()) {
-        alert('✅ Регистрация успешна! Переход на /username');
-      }
-    });
-
-    regEmail.addEventListener('input', () => hideError(regEmailErr));
-    regPassword.addEventListener('input', () => hideError(regPassErr));
-    regConfirm.addEventListener('input', () => hideError(regConfirmErr));
-
-    regEmail.addEventListener('blur', function() {
-      const val = this.value.trim();
-      if (val && !isValidEmail(val)) {
-        showError(regEmailErr, 'Некорректный email');
-      }
-    });
-
-    regConfirm.addEventListener('blur', function() {
-      const pass = regPassword.value.trim();
-      const confirm = this.value.trim();
-      if (pass && confirm && pass !== confirm) {
-        showError(regConfirmErr, 'Пароли не совпадают');
-      }
-    });
-
-    regConfirm.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') regNext.click();
-    });
-
-    // ===== ЛОГИН =====
-    loginEmail.addEventListener('blur', function() {
-      const val = this.value.trim();
-      if (val && !isValidEmail(val)) {
-        showError(loginEmailErr, 'Некорректный email');
-      } else {
-        hideError(loginEmailErr);
-      }
-    });
-    loginEmail.addEventListener('input', () => hideError(loginEmailErr));
-
-    // ===== КНОПКИ СОЦСЕТЕЙ =====
-    document.querySelectorAll('.social-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const provider = this.textContent.trim();
-        alert(`🔐 Вход через ${provider}`);
-        this.style.transform = 'scale(0.94)';
-        setTimeout(() => this.style.transform = '', 150);
-      });
-    });
-
-    // ===== ТИПОГРАФСКИЙ ЭФФЕКТ (С ФИКСОМ) =====
+    // ===== ТИПОГРАФСКИЙ ЭФФЕКТ =====
     const headline = document.getElementById('headline');
     const fullText = 'Иногда тебя понимает только тот, кто чувствует то же самое';
     let isTyping = false;
@@ -941,7 +330,7 @@
       typeChar();
     }
 
-    setTimeout(() => typeEffect(fullText, headline, 50), 300);
+    setTimeout(() => typeEffect(fullText, headline, 50), 400);
 
     headline.addEventListener('click', function(e) {
       e.stopPropagation();
@@ -950,11 +339,28 @@
       }
     });
 
-    // ===== БЛОКИРОВКА СКРОЛЛА =====
-    document.addEventListener('gesturestart', e => e.preventDefault());
+    // ===== КНОПКИ =====
+    firstCta.addEventListener('click', function() {
+      appScreen.style.opacity = '0';
+      appScreen.style.transform = 'translateY(-8px)';
+      appScreen.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      setTimeout(() => {
+        window.location.href = 'https://destr123.github.io/-NAME-/login';
+      }, 350);
+    });
 
-    // ===== ИНИЦИАЛИЗАЦИЯ =====
-    resetClasses();
+    loginLink.addEventListener('click', function(e) {
+      e.preventDefault();
+      appScreen.style.opacity = '0';
+      appScreen.style.transform = 'translateY(-8px)';
+      appScreen.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      setTimeout(() => {
+        window.location.href = 'https://destr123.github.io/-NAME-/login';
+      }, 350);
+    });
+
+    // ===== БЛОКИРОВКА =====
+    document.addEventListener('gesturestart', e => e.preventDefault());
 
   })();
 </script>
