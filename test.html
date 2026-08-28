@@ -285,46 +285,52 @@
 
     <script>
         // ============================================================
-        // 10 ВАРИАНТОВ ФОНОВ С ПАПОРОТНИКОМ
+        // 10 ВАРИАНТОВ ФОНОВ С ПАПОРОТНИКОМ (С ВНЕШНЕЙ ОБОЛОЧКОЙ)
         // ============================================================
 
         const ferns = [{
             id: 1,
             name: 'Классический угловой',
-            desc: 'Два листа из правого нижнего угла',
+            desc: 'Два листа из правого нижнего угла с внешним контуром',
             badge: 'асимметрия',
             svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Большой лист -->
-            <path d="M380 390 C350 340 300 270 250 210 C210 160 175 120 155 85 C145 68 138 55 135 42" stroke-width="2.2"/>
-            <path d="M300 270 C280 280 260 290 245 300" stroke-width="1.6"/>
-            <path d="M300 270 C320 280 340 290 355 300" stroke-width="1.6"/>
-            <path d="M260 220 C242 228 225 235 212 245" stroke-width="1.4"/>
-            <path d="M260 220 C278 228 295 235 308 245" stroke-width="1.4"/>
-            <path d="M225 175 C210 182 195 188 185 198" stroke-width="1.2"/>
-            <path d="M225 175 C240 182 255 188 265 198" stroke-width="1.2"/>
-            <path d="M195 140 C183 146 172 152 165 162" stroke-width="1.0"/>
-            <path d="M195 140 C207 146 218 152 225 162" stroke-width="1.0"/>
-            <path d="M170 110 C160 115 152 120 148 128" stroke-width="0.9"/>
-            <path d="M170 110 C180 115 188 120 192 128" stroke-width="0.9"/>
-            <!-- Маленький лист -->
-            <path d="M280 290 C260 250 230 200 200 160 C178 130 160 105 150 85 C145 75 142 68 140 60" stroke-width="2.0"/>
+            <!-- БОЛЬШОЙ ЛИСТ -->
+            <!-- Внешняя оболочка (контур) -->
+            <path d="M380 390 C355 345 310 280 260 220 C220 170 185 125 165 90 C152 68 145 50 140 38" stroke-width="2.0"/>
+            <path d="M140 38 C135 30 132 25 130 22" stroke-width="1.5"/>
+            <!-- Основные жилки -->
+            <path d="M310 280 C290 288 270 295 255 305" stroke-width="1.5"/>
+            <path d="M310 280 C330 288 350 295 365 305" stroke-width="1.5"/>
+            <path d="M270 225 C252 232 235 238 222 248" stroke-width="1.4"/>
+            <path d="M270 225 C288 232 305 238 318 248" stroke-width="1.4"/>
+            <path d="M230 175 C215 182 200 188 190 198" stroke-width="1.2"/>
+            <path d="M230 175 C245 182 260 188 270 198" stroke-width="1.2"/>
+            <path d="M195 135 C183 141 172 147 165 157" stroke-width="1.0"/>
+            <path d="M195 135 C207 141 218 147 225 157" stroke-width="1.0"/>
+            <path d="M165 100 C155 106 147 112 143 120" stroke-width="0.9"/>
+            <path d="M165 100 C175 106 183 112 187 120" stroke-width="0.9"/>
+            <!-- МАЛЕНЬКИЙ ЛИСТ -->
+            <path d="M280 290 C260 255 230 210 200 170 C178 140 160 112 150 90 C145 80 142 72 140 65" stroke-width="1.8"/>
             <path d="M230 200 C215 208 200 215 190 225" stroke-width="1.4"/>
             <path d="M230 200 C245 208 260 215 270 225" stroke-width="1.4"/>
             <path d="M200 160 C188 168 175 175 168 185" stroke-width="1.2"/>
             <path d="M200 160 C212 168 225 175 232 185" stroke-width="1.2"/>
-            <path d="M170 130 C160 136 152 142 148 150" stroke-width="1.0"/>
-            <path d="M170 130 C180 136 188 142 192 150" stroke-width="1.0"/>
+            <path d="M175 130 C165 136 157 142 153 150" stroke-width="1.0"/>
+            <path d="M175 130 C185 136 193 142 197 150" stroke-width="1.0"/>
           </g>
         </svg>`
         }, {
             id: 2,
             name: 'Одиночный гигант',
-            desc: 'Огромный лист через весь экран',
+            desc: 'Огромный лист с полным контуром через весь экран',
             badge: 'моно',
             svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M380 380 C340 310 280 230 220 160 C180 110 140 70 120 40 C110 25 105 15 102 8" stroke-width="2.5"/>
+            <!-- Внешняя оболочка -->
+            <path d="M380 380 C345 315 290 240 230 170 C190 120 150 75 125 45 C112 28 105 18 100 10" stroke-width="2.4"/>
+            <path d="M100 10 C95 4 92 0 90 -3" stroke-width="1.6"/>
+            <!-- Жилки -->
             <path d="M300 270 C275 282 250 292 230 305" stroke-width="1.8"/>
             <path d="M300 270 C325 282 350 292 370 305" stroke-width="1.8"/>
             <path d="M250 210 C228 220 208 228 190 240" stroke-width="1.6"/>
@@ -340,188 +346,205 @@
         }, {
             id: 3,
             name: 'Три листа',
-            desc: 'Три папоротника разного размера',
+            desc: 'Три папоротника с контурами разного размера',
             badge: 'много',
             svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Лист 1 (большой, слева) -->
-            <path d="M20 380 C50 320 90 250 130 190 C160 145 180 105 190 75" stroke-width="2.2"/>
-            <path d="M80 280 C60 290 40 300 25 312" stroke-width="1.6"/>
-            <path d="M80 280 C100 290 120 300 135 312" stroke-width="1.6"/>
-            <path d="M110 220 C92 228 75 235 62 245" stroke-width="1.4"/>
-            <path d="M110 220 C128 228 145 235 158 245" stroke-width="1.4"/>
-            <!-- Лист 2 (средний, справа) -->
-            <path d="M380 380 C350 330 310 270 270 220 C240 180 220 140 210 110" stroke-width="2.0"/>
-            <path d="M310 280 C290 290 270 300 255 312" stroke-width="1.5"/>
-            <path d="M310 280 C330 290 350 300 365 312" stroke-width="1.5"/>
-            <path d="M280 230 C262 238 245 245 232 255" stroke-width="1.3"/>
-            <path d="M280 230 C298 238 315 245 328 255" stroke-width="1.3"/>
-            <!-- Лист 3 (маленький, в центре) -->
-            <path d="M200 380 C195 340 185 290 175 250 C168 220 160 195 155 175" stroke-width="1.6"/>
-            <path d="M185 290 C172 298 160 305 152 315" stroke-width="1.2"/>
-            <path d="M185 290 C198 298 210 305 218 315" stroke-width="1.2"/>
+            <!-- Лист 1 (большой) -->
+            <path d="M20 380 C50 325 95 260 135 200 C165 155 185 115 195 82 C200 65 202 52 203 42" stroke-width="2.2"/>
+            <path d="M85 285 C65 295 45 305 30 317" stroke-width="1.6"/>
+            <path d="M85 285 C105 295 125 305 140 317" stroke-width="1.6"/>
+            <path d="M115 225 C97 233 80 240 67 250" stroke-width="1.4"/>
+            <path d="M115 225 C133 233 150 240 163 250" stroke-width="1.4"/>
+            <path d="M140 175 C125 182 110 188 100 198" stroke-width="1.2"/>
+            <path d="M140 175 C155 182 170 188 180 198" stroke-width="1.2"/>
+            <!-- Лист 2 (средний) -->
+            <path d="M380 380 C355 335 315 280 275 230 C245 190 225 150 215 120 C210 105 207 92 205 82" stroke-width="2.0"/>
+            <path d="M315 285 C295 295 275 305 260 317" stroke-width="1.5"/>
+            <path d="M315 285 C335 295 355 305 370 317" stroke-width="1.5"/>
+            <path d="M285 235 C267 243 250 250 237 260" stroke-width="1.3"/>
+            <path d="M285 235 C303 243 320 250 333 260" stroke-width="1.3"/>
+            <!-- Лист 3 (маленький) -->
+            <path d="M200 380 C196 345 188 300 178 265 C172 240 165 215 160 195 C157 180 155 168 154 158" stroke-width="1.6"/>
+            <path d="M188 295 C175 303 163 310 155 320" stroke-width="1.2"/>
+            <path d="M188 295 C201 303 213 310 221 320" stroke-width="1.2"/>
+            <path d="M178 260 C168 266 158 272 152 280" stroke-width="1.0"/>
+            <path d="M178 260 C188 266 198 272 204 280" stroke-width="1.0"/>
           </g>
         </svg>`
         }, {
             id: 4,
             name: 'Диагональный',
-            desc: 'Листья по диагонали слева-снизу направо-вверх',
+            desc: 'Листья по диагонали с полным контуром',
             badge: 'диагональ',
             svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M10 390 C60 340 120 280 180 220 C220 180 260 140 290 100 C310 72 325 50 335 30" stroke-width="2.4"/>
-            <path d="M180 220 C155 232 130 242 110 255" stroke-width="1.7"/>
-            <path d="M180 220 C205 232 230 242 250 255" stroke-width="1.7"/>
-            <path d="M220 180 C198 190 178 198 160 210" stroke-width="1.5"/>
-            <path d="M220 180 C242 190 262 198 280 210" stroke-width="1.5"/>
-            <path d="M255 145 C238 153 220 160 208 170" stroke-width="1.3"/>
-            <path d="M255 145 C272 153 290 160 302 170" stroke-width="1.3"/>
-            <path d="M280 115 C268 122 255 128 248 138" stroke-width="1.1"/>
-            <path d="M280 115 C292 122 305 128 312 138" stroke-width="1.1"/>
+            <!-- Внешняя оболочка -->
+            <path d="M10 390 C60 345 125 285 185 225 C225 185 265 145 295 105 C315 77 330 55 340 35" stroke-width="2.4"/>
+            <path d="M340 35 C345 25 348 18 350 12" stroke-width="1.6"/>
+            <!-- Жилки -->
+            <path d="M185 225 C160 237 135 247 115 260" stroke-width="1.7"/>
+            <path d="M185 225 C210 237 235 247 255 260" stroke-width="1.7"/>
+            <path d="M225 185 C203 195 183 203 165 215" stroke-width="1.5"/>
+            <path d="M225 185 C247 195 267 203 285 215" stroke-width="1.5"/>
+            <path d="M260 150 C243 158 225 165 213 175" stroke-width="1.3"/>
+            <path d="M260 150 C277 158 295 165 307 175" stroke-width="1.3"/>
+            <path d="M285 120 C273 127 260 133 253 143" stroke-width="1.1"/>
+            <path d="M285 120 C297 127 310 133 317 143" stroke-width="1.1"/>
           </g>
         </svg>`
         }, {
             id: 5,
             name: 'Парящие листья',
-            desc: 'Листья разбросаны по всему полю',
+            desc: 'Листья с контурами, разбросанные по полю',
             badge: 'свободный',
             svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
-            <!-- Верхний левый -->
-            <path d="M30 80 C50 60 80 50 110 45 C130 42 145 42 155 45" stroke-width="1.8"/>
-            <path d="M80 55 C68 62 56 68 48 78" stroke-width="1.3"/>
-            <path d="M80 55 C92 62 104 68 112 78" stroke-width="1.3"/>
-            <!-- Правый верхний -->
-            <path d="M370 120 C350 100 320 90 290 85 C270 82 255 82 245 85" stroke-width="1.8"/>
-            <path d="M320 95 C308 102 296 108 288 118" stroke-width="1.3"/>
-            <path d="M320 95 C332 102 344 108 352 118" stroke-width="1.3"/>
-            <!-- Центральный -->
-            <path d="M200 200 C180 175 155 155 135 140 C122 130 112 122 105 118" stroke-width="2.0"/>
-            <path d="M155 160 C140 168 125 175 115 185" stroke-width="1.5"/>
-            <path d="M155 160 C170 168 185 175 195 185" stroke-width="1.5"/>
-            <!-- Нижний правый -->
-            <path d="M380 350 C360 330 330 320 300 315 C280 312 265 312 255 315" stroke-width="1.8"/>
-            <path d="M330 325 C318 332 306 338 298 348" stroke-width="1.3"/>
-            <path d="M330 325 C342 332 354 338 362 348" stroke-width="1.3"/>
+            <!-- Лист 1 (верхний левый) -->
+            <path d="M30 80 C50 62 82 52 115 48 C135 45 148 45 158 48" stroke-width="1.8"/>
+            <path d="M82 58 C70 65 58 71 50 81" stroke-width="1.3"/>
+            <path d="M82 58 C94 65 106 71 114 81" stroke-width="1.3"/>
+            <path d="M60 68 C52 72 46 76 42 82" stroke-width="1.0"/>
+            <path d="M60 68 C68 72 74 76 78 82" stroke-width="1.0"/>
+            <!-- Лист 2 (правый верхний) -->
+            <path d="M370 120 C350 102 318 92 285 88 C265 85 252 85 242 88" stroke-width="1.8"/>
+            <path d="M318 98 C306 105 294 111 286 121" stroke-width="1.3"/>
+            <path d="M318 98 C330 105 342 111 350 121" stroke-width="1.3"/>
+            <!-- Лист 3 (центральный) -->
+            <path d="M200 200 C182 178 160 160 142 148 C130 140 120 134 112 128" stroke-width="2.0"/>
+            <path d="M160 165 C145 173 130 180 120 190" stroke-width="1.5"/>
+            <path d="M160 165 C175 173 190 180 200 190" stroke-width="1.5"/>
+            <path d="M140 150 C130 155 122 160 118 168" stroke-width="1.0"/>
+            <path d="M140 150 C150 155 158 160 162 168" stroke-width="1.0"/>
+            <!-- Лист 4 (нижний правый) -->
+            <path d="M380 350 C362 332 330 322 300 318 C280 315 267 315 257 318" stroke-width="1.8"/>
+            <path d="M330 328 C318 335 306 341 298 351" stroke-width="1.3"/>
+            <path d="M330 328 C342 335 354 341 362 351" stroke-width="1.3"/>
           </g>
         </svg>`
         }, {
             id: 6,
             name: 'Ботанический',
-            desc: 'Детальный, с множеством мелких листочков',
+            desc: 'Детальный папоротник с контуром и множеством жилок',
             badge: 'детальный',
             svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M380 390 C350 340 300 280 250 220 C210 170 180 125 165 90 C155 68 150 50 148 38" stroke-width="2.0"/>
+            <!-- Внешняя оболочка -->
+            <path d="M380 390 C355 345 310 285 260 225 C220 175 190 130 172 95 C162 72 155 52 150 38" stroke-width="2.0"/>
+            <path d="M150 38 C147 30 144 24 142 18" stroke-width="1.2"/>
+            <!-- Основные жилки -->
             <path d="M310 280 C290 288 270 295 255 305" stroke-width="1.5"/>
             <path d="M310 280 C330 288 350 295 365 305" stroke-width="1.5"/>
-            <path d="M310 280 C295 285 280 290 268 298" stroke-width="0.9"/>
-            <path d="M310 280 C325 285 340 290 352 298" stroke-width="0.9"/>
             <path d="M270 225 C252 232 235 238 222 248" stroke-width="1.4"/>
             <path d="M270 225 C288 232 305 238 318 248" stroke-width="1.4"/>
-            <path d="M270 225 C258 230 245 235 235 242" stroke-width="0.8"/>
-            <path d="M270 225 C282 230 295 235 305 242" stroke-width="0.8"/>
             <path d="M230 175 C215 182 200 188 190 198" stroke-width="1.2"/>
             <path d="M230 175 C245 182 260 188 270 198" stroke-width="1.2"/>
-            <path d="M230 175 C220 180 210 185 202 192" stroke-width="0.8"/>
-            <path d="M230 175 C240 180 250 185 258 192" stroke-width="0.8"/>
             <path d="M195 135 C183 141 172 147 165 157" stroke-width="1.0"/>
             <path d="M195 135 C207 141 218 147 225 157" stroke-width="1.0"/>
-            <path d="M170 100 C160 106 152 112 148 120" stroke-width="0.9"/>
-            <path d="M170 100 C180 106 188 112 192 120" stroke-width="0.9"/>
-            <path d="M148 38 C142 42 138 46 136 52" stroke-width="0.7"/>
-            <path d="M148 38 C154 42 158 46 160 52" stroke-width="0.7"/>
+            <!-- Мелкие жилки -->
+            <path d="M310 280 C295 285 280 290 268 298" stroke-width="0.8"/>
+            <path d="M310 280 C325 285 340 290 352 298" stroke-width="0.8"/>
+            <path d="M270 225 C258 230 245 235 235 242" stroke-width="0.7"/>
+            <path d="M270 225 C282 230 295 235 305 242" stroke-width="0.7"/>
+            <path d="M230 175 C220 180 210 185 202 192" stroke-width="0.7"/>
+            <path d="M230 175 C240 180 250 185 258 192" stroke-width="0.7"/>
           </g>
         </svg>`
         }, {
             id: 7,
             name: 'Ветвистый',
-            desc: 'Папоротник с разветвлённым стеблем',
+            desc: 'Папоротник с разветвлениями и внешним контуром',
             badge: 'ветвистый',
             svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M380 380 C360 340 330 290 290 240 C260 200 230 160 210 130 C195 108 185 90 178 75" stroke-width="2.2"/>
-            <path d="M290 240 C270 250 250 260 235 270" stroke-width="1.5"/>
-            <path d="M290 240 C310 250 330 260 345 270" stroke-width="1.5"/>
-            <path d="M250 200 C232 208 215 215 202 225" stroke-width="1.4"/>
-            <path d="M250 200 C268 208 285 215 298 225" stroke-width="1.4"/>
-            <path d="M210 160 C192 168 175 175 162 185" stroke-width="1.2"/>
-            <path d="M210 160 C228 168 245 175 258 185" stroke-width="1.2"/>
+            <!-- Основной стебель + оболочка -->
+            <path d="M380 380 C362 345 335 300 295 250 C265 210 235 170 215 140 C200 118 190 100 183 85" stroke-width="2.2"/>
+            <path d="M183 85 C178 75 174 68 171 60" stroke-width="1.5"/>
+            <!-- Жилки основного листа -->
+            <path d="M295 250 C275 260 255 270 240 280" stroke-width="1.5"/>
+            <path d="M295 250 C315 260 335 270 350 280" stroke-width="1.5"/>
+            <path d="M255 210 C237 218 220 225 207 235" stroke-width="1.4"/>
+            <path d="M255 210 C273 218 290 225 303 235" stroke-width="1.4"/>
+            <path d="M215 170 C197 178 180 185 167 195" stroke-width="1.2"/>
+            <path d="M215 170 C233 178 250 185 263 195" stroke-width="1.2"/>
             <!-- Ветвь в сторону -->
-            <path d="M290 240 C305 225 320 210 340 200 C350 195 358 192 365 190" stroke-width="1.6"/>
-            <path d="M320 210 C308 218 296 225 288 235" stroke-width="1.2"/>
-            <path d="M320 210 C332 218 344 225 352 235" stroke-width="1.2"/>
-            <path d="M340 200 C330 205 320 210 312 218" stroke-width="1.0"/>
-            <path d="M340 200 C350 205 360 210 368 218" stroke-width="1.0"/>
+            <path d="M295 250 C310 235 325 220 345 210 C355 205 363 202 370 200" stroke-width="1.8"/>
+            <path d="M325 220 C313 228 301 235 293 245" stroke-width="1.3"/>
+            <path d="M325 220 C337 228 349 235 357 245" stroke-width="1.3"/>
+            <path d="M345 210 C335 215 325 220 317 228" stroke-width="1.0"/>
+            <path d="M345 210 C355 215 365 220 373 228" stroke-width="1.0"/>
           </g>
         </svg>`
         }, {
             id: 8,
             name: 'Минимальный',
-            desc: 'Очень мало листьев, чистый минимализм',
+            desc: 'Минимум деталей, но с чётким контуром',
             badge: 'минимальный',
             svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g stroke="#e5e7e5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M380 390 C350 340 310 280 270 230 C240 190 215 155 200 130 C190 115 183 102 178 92" stroke-width="2.0"/>
-            <path d="M300 280 C285 290 270 300 260 310" stroke-width="1.4"/>
-            <path d="M300 280 C315 290 330 300 340 310" stroke-width="1.4"/>
-            <path d="M260 230 C248 238 235 245 228 255" stroke-width="1.2"/>
-            <path d="M260 230 C272 238 285 245 292 255" stroke-width="1.2"/>
-            <path d="M230 190 C220 196 212 202 208 210" stroke-width="1.0"/>
-            <path d="M230 190 C240 196 248 202 252 210" stroke-width="1.0"/>
-            <path d="M200 155 C192 160 186 165 183 172" stroke-width="0.8"/>
-            <path d="M200 155 C208 160 214 165 217 172" stroke-width="0.8"/>
+            <!-- Внешняя оболочка -->
+            <path d="M380 390 C355 345 315 290 275 240 C245 200 220 165 205 140 C195 125 188 112 183 100" stroke-width="2.0"/>
+            <path d="M183 100 C180 92 177 86 175 80" stroke-width="1.4"/>
+            <!-- Жилки (минимально) -->
+            <path d="M305 285 C290 295 275 305 265 315" stroke-width="1.4"/>
+            <path d="M305 285 C320 295 335 305 345 315" stroke-width="1.4"/>
+            <path d="M265 235 C253 243 240 250 233 260" stroke-width="1.2"/>
+            <path d="M265 235 C277 243 290 250 297 260" stroke-width="1.2"/>
+            <path d="M233 195 C223 201 215 207 211 215" stroke-width="1.0"/>
+            <path d="M233 195 C243 201 251 207 255 215" stroke-width="1.0"/>
           </g>
         </svg>`
         }, {
             id: 9,
             name: 'Зеркальный',
-            desc: 'Два симметричных листа по краям',
+            desc: 'Два симметричных листа с контурами по краям',
             badge: 'симметрия',
             svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
             <!-- Левый лист -->
-            <path d="M30 380 C60 330 100 270 140 210 C170 165 190 125 200 95 C205 80 208 68 210 58" stroke-width="2.2"/>
-            <path d="M100 280 C80 290 60 300 45 312" stroke-width="1.6"/>
-            <path d="M100 280 C120 290 140 300 155 312" stroke-width="1.6"/>
-            <path d="M130 220 C112 228 95 235 82 245" stroke-width="1.4"/>
-            <path d="M130 220 C148 228 165 235 178 245" stroke-width="1.4"/>
-            <path d="M160 170 C145 178 130 185 120 195" stroke-width="1.2"/>
-            <path d="M160 170 C175 178 190 185 200 195" stroke-width="1.2"/>
+            <path d="M30 380 C65 335 105 275 145 215 C175 170 195 130 205 100 C210 85 213 72 215 62" stroke-width="2.2"/>
+            <path d="M215 62 C216 55 217 50 218 45" stroke-width="1.4"/>
+            <path d="M105 285 C85 295 65 305 50 317" stroke-width="1.6"/>
+            <path d="M105 285 C125 295 145 305 160 317" stroke-width="1.6"/>
+            <path d="M135 225 C117 233 100 240 87 250" stroke-width="1.4"/>
+            <path d="M135 225 C153 233 170 240 183 250" stroke-width="1.4"/>
+            <path d="M165 175 C150 183 135 190 125 200" stroke-width="1.2"/>
+            <path d="M165 175 C180 183 195 190 205 200" stroke-width="1.2"/>
             <!-- Правый лист -->
-            <path d="M370 380 C340 330 300 270 260 210 C230 165 210 125 200 95 C195 80 192 68 190 58" stroke-width="2.2"/>
-            <path d="M300 280 C280 290 260 300 245 312" stroke-width="1.6"/>
-            <path d="M300 280 C320 290 340 300 355 312" stroke-width="1.6"/>
-            <path d="M270 220 C252 228 235 235 222 245" stroke-width="1.4"/>
-            <path d="M270 220 C288 228 305 235 318 245" stroke-width="1.4"/>
-            <path d="M240 170 C225 178 210 185 200 195" stroke-width="1.2"/>
-            <path d="M240 170 C255 178 270 185 280 195" stroke-width="1.2"/>
+            <path d="M370 380 C335 335 295 275 255 215 C225 170 205 130 195 100 C190 85 187 72 185 62" stroke-width="2.2"/>
+            <path d="M185 62 C184 55 183 50 182 45" stroke-width="1.4"/>
+            <path d="M295 285 C275 295 255 305 240 317" stroke-width="1.6"/>
+            <path d="M295 285 C315 295 335 305 350 317" stroke-width="1.6"/>
+            <path d="M265 225 C247 233 230 240 217 250" stroke-width="1.4"/>
+            <path d="M265 225 C283 233 300 240 313 250" stroke-width="1.4"/>
+            <path d="M235 175 C220 183 205 190 195 200" stroke-width="1.2"/>
+            <path d="M235 175 C250 183 265 190 275 200" stroke-width="1.2"/>
           </g>
         </svg>`
         }, {
             id: 10,
             name: 'Угловой верхний',
-            desc: 'Листья из правого верхнего угла',
+            desc: 'Листья из правого верхнего угла с контуром',
             badge: 'верхний',
             svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M380 10 C350 60 300 120 250 180 C210 230 180 270 160 305 C148 328 140 345 135 358" stroke-width="2.2"/>
-            <path d="M300 120 C280 110 260 100 245 88" stroke-width="1.6"/>
-            <path d="M300 120 C320 110 340 100 355 88" stroke-width="1.6"/>
-            <path d="M260 170 C242 162 225 155 212 145" stroke-width="1.4"/>
-            <path d="M260 170 C278 162 295 155 308 145" stroke-width="1.4"/>
-            <path d="M225 215 C210 208 195 202 185 192" stroke-width="1.2"/>
-            <path d="M225 215 C240 208 255 202 265 192" stroke-width="1.2"/>
-            <path d="M195 255 C183 248 172 242 165 232" stroke-width="1.0"/>
-            <path d="M195 255 C207 248 218 242 225 232" stroke-width="1.0"/>
-            <path d="M170 290 C160 284 152 278 148 270" stroke-width="0.9"/>
-            <path d="M170 290 C180 284 188 278 192 270" stroke-width="0.9"/>
-            <!-- Маленький лист -->
-            <path d="M360 60 C340 100 310 150 280 200 C260 235 245 260 235 280 C228 292 223 302 220 310" stroke-width="1.8"/>
-            <path d="M310 150 C295 142 280 135 270 125" stroke-width="1.3"/>
-            <path d="M310 150 C325 142 340 135 350 125" stroke-width="1.3"/>
-            <path d="M280 195 C268 188 255 182 248 172" stroke-width="1.1"/>
-            <path d="M280 195 C292 188 305 182 312 172" stroke-width="1.1"/>
+            <!-- БОЛЬШОЙ ЛИСТ -->
+            <path d="M380 10 C355 60 305 120 255 180 C215 230 185 270 165 305 C153 328 145 345 140 358" stroke-width="2.2"/>
+            <path d="M140 358 C137 365 135 370 133 375" stroke-width="1.4"/>
+            <path d="M305 120 C285 110 265 100 250 88" stroke-width="1.6"/>
+            <path d="M305 120 C325 110 345 100 360 88" stroke-width="1.6"/>
+            <path d="M265 170 C247 162 230 155 217 145" stroke-width="1.4"/>
+            <path d="M265 170 C283 162 300 155 313 145" stroke-width="1.4"/>
+            <path d="M230 215 C215 208 200 202 190 192" stroke-width="1.2"/>
+            <path d="M230 215 C245 208 260 202 270 192" stroke-width="1.2"/>
+            <path d="M200 255 C188 248 177 242 170 232" stroke-width="1.0"/>
+            <path d="M200 255 C212 248 223 242 230 232" stroke-width="1.0"/>
+            <!-- МАЛЕНЬКИЙ ЛИСТ -->
+            <path d="M360 60 C342 100 315 150 285 200 C265 235 250 260 240 280 C233 292 228 302 225 310" stroke-width="1.8"/>
+            <path d="M315 150 C300 142 285 135 275 125" stroke-width="1.3"/>
+            <path d="M315 150 C330 142 345 135 355 125" stroke-width="1.3"/>
+            <path d="M285 195 C273 188 260 182 253 172" stroke-width="1.1"/>
+            <path d="M285 195 C297 188 310 182 317 172" stroke-width="1.1"/>
           </g>
         </svg>`
         }];
@@ -538,7 +561,7 @@
         const modalClose = document.getElementById('modalClose');
         const copyBtn = document.getElementById('copyBtn');
 
-        ferns.forEach((f, index) => {
+        ferns.forEach((f) => {
             const card = document.createElement('div');
             card.className = 'card';
             card.innerHTML = `
@@ -596,7 +619,6 @@
                     copyBtn.className = 'copy-btn';
                 }, 2000);
             } catch (err) {
-                // fallback
                 const range = document.createRange();
                 range.selectNode(modalCode);
                 window.getSelection().removeAllRanges();
@@ -610,10 +632,6 @@
                 }, 2000);
             }
         });
-
-        // ============================================================
-        // БЛОКИРОВКА ЗУМА
-        // ============================================================
 
         document.addEventListener('gesturestart', (e) => e.preventDefault());
     </script>
