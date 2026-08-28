@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>10 фонов с папоротником</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inconsolata', monospace;
+            background: #f5f5f7;
+            color: #1e1e1e;
+            padding: 24px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            color: #1e1e1e;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            font-weight: 400;
+            margin-bottom: 32px;
+            letter-spacing: 1px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-preview {
+            position: relative;
+            width: 100%;
+            padding-top: 75%;
+            background: #ffffff;
+            overflow: hidden;
+        }
+
+        .card-preview svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .card-info {
+            padding: 16px 20px 20px;
+        }
+
+        .card-info .name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e1e1e;
+            margin-bottom: 4px;
+        }
+
+        .card-info .desc {
+            font-size: 12px;
+            color: #999;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        .card-info .badge {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 2px 12px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 10px;
+            color: #666;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.open {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            border-radius: 24px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 32px 28px 28px;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.2s;
+            padding: 4px 8px;
+        }
+
+        .modal-close:hover {
+            color: #1e1e1e;
+        }
+
+        .modal-preview {
+            width: 100%;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 16px;
+        }
+
+        .modal-preview svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .modal-code {
+            background: #f8f8f8;
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 11px;
+            font-family: 'Inconsolata', monospace;
+            color: #444;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            margin-top: 8px;
+        }
+
+        .modal-code-label {
+            font-size: 12px;
+            color: #888;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-top: 12px;
+        }
+
+        .copy-btn {
+            background: #2b7a4b;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-family: 'Inconsolata', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 8px;
+        }
+
+        .copy-btn:hover {
+            background: #1d5c34;
+        }
+
+        .copy-btn.copied {
+            background: #888;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px;
+            }
+            .grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .card-info .name {
+                font-size: 13px;
+            }
+            .card-info .desc {
+                font-size: 10px;
+            }
+            .modal-content {
+                padding: 20px 16px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>10 фонов с папоротником</h1>
+    <p class="subtitle">нажми на любой, чтобы увидеть крупно и скопировать код</p>
+
+    <div class="grid" id="grid"></div>
+
+    <!-- Модальное окно -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Название</h2>
+                <button class="modal-close" id="modalClose">✕</button>
+            </div>
+            <div class="modal-preview" id="modalPreview"></div>
+            <div class="modal-code-label">SVG-код:</div>
+            <div class="modal-code" id="modalCode"></div>
+            <button class="copy-btn" id="copyBtn">📋 Скопировать</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 10 ВАРИАНТОВ ФОНОВ С ПАПОРОТНИКОМ
+        // ============================================================
+
+        const ferns = [{
+            id: 1,
+            name: 'Классический угловой',
+            desc: 'Два листа из правого нижнего угла',
+            badge: 'асимметрия',
+            svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Большой лист -->
+            <path d="M380 390 C350 340 300 270 250 210 C210 160 175 120 155 85 C145 68 138 55 135 42" stroke-width="2.2"/>
+            <path d="M300 270 C280 280 260 290 245 300" stroke-width="1.6"/>
+            <path d="M300 270 C320 280 340 290 355 300" stroke-width="1.6"/>
+            <path d="M260 220 C242 228 225 235 212 245" stroke-width="1.4"/>
+            <path d="M260 220 C278 228 295 235 308 245" stroke-width="1.4"/>
+            <path d="M225 175 C210 182 195 188 185 198" stroke-width="1.2"/>
+            <path d="M225 175 C240 182 255 188 265 198" stroke-width="1.2"/>
+            <path d="M195 140 C183 146 172 152 165 162" stroke-width="1.0"/>
+            <path d="M195 140 C207 146 218 152 225 162" stroke-width="1.0"/>
+            <path d="M170 110 C160 115 152 120 148 128" stroke-width="0.9"/>
+            <path d="M170 110 C180 115 188 120 192 128" stroke-width="0.9"/>
+            <!-- Маленький лист -->
+            <path d="M280 290 C260 250 230 200 200 160 C178 130 160 105 150 85 C145 75 142 68 140 60" stroke-width="2.0"/>
+            <path d="M230 200 C215 208 200 215 190 225" stroke-width="1.4"/>
+            <path d="M230 200 C245 208 260 215 270 225" stroke-width="1.4"/>
+            <path d="M200 160 C188 168 175 175 168 185" stroke-width="1.2"/>
+            <path d="M200 160 C212 168 225 175 232 185" stroke-width="1.2"/>
+            <path d="M170 130 C160 136 152 142 148 150" stroke-width="1.0"/>
+            <path d="M170 130 C180 136 188 142 192 150" stroke-width="1.0"/>
+          </g>
+        </svg>`
+        }, {
+            id: 2,
+            name: 'Одиночный гигант',
+            desc: 'Огромный лист через весь экран',
+            badge: 'моно',
+            svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M380 380 C340 310 280 230 220 160 C180 110 140 70 120 40 C110 25 105 15 102 8" stroke-width="2.5"/>
+            <path d="M300 270 C275 282 250 292 230 305" stroke-width="1.8"/>
+            <path d="M300 270 C325 282 350 292 370 305" stroke-width="1.8"/>
+            <path d="M250 210 C228 220 208 228 190 240" stroke-width="1.6"/>
+            <path d="M250 210 C272 220 292 228 310 240" stroke-width="1.6"/>
+            <path d="M200 150 C182 158 165 165 150 175" stroke-width="1.4"/>
+            <path d="M200 150 C218 158 235 165 250 175" stroke-width="1.4"/>
+            <path d="M160 100 C145 108 130 115 120 125" stroke-width="1.2"/>
+            <path d="M160 100 C175 108 190 115 200 125" stroke-width="1.2"/>
+            <path d="M130 60 C118 66 108 72 100 80" stroke-width="1.0"/>
+            <path d="M130 60 C142 66 152 72 160 80" stroke-width="1.0"/>
+          </g>
+        </svg>`
+        }, {
+            id: 3,
+            name: 'Три листа',
+            desc: 'Три папоротника разного размера',
+            badge: 'много',
+            svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Лист 1 (большой, слева) -->
+            <path d="M20 380 C50 320 90 250 130 190 C160 145 180 105 190 75" stroke-width="2.2"/>
+            <path d="M80 280 C60 290 40 300 25 312" stroke-width="1.6"/>
+            <path d="M80 280 C100 290 120 300 135 312" stroke-width="1.6"/>
+            <path d="M110 220 C92 228 75 235 62 245" stroke-width="1.4"/>
+            <path d="M110 220 C128 228 145 235 158 245" stroke-width="1.4"/>
+            <!-- Лист 2 (средний, справа) -->
+            <path d="M380 380 C350 330 310 270 270 220 C240 180 220 140 210 110" stroke-width="2.0"/>
+            <path d="M310 280 C290 290 270 300 255 312" stroke-width="1.5"/>
+            <path d="M310 280 C330 290 350 300 365 312" stroke-width="1.5"/>
+            <path d="M280 230 C262 238 245 245 232 255" stroke-width="1.3"/>
+            <path d="M280 230 C298 238 315 245 328 255" stroke-width="1.3"/>
+            <!-- Лист 3 (маленький, в центре) -->
+            <path d="M200 380 C195 340 185 290 175 250 C168 220 160 195 155 175" stroke-width="1.6"/>
+            <path d="M185 290 C172 298 160 305 152 315" stroke-width="1.2"/>
+            <path d="M185 290 C198 298 210 305 218 315" stroke-width="1.2"/>
+          </g>
+        </svg>`
+        }, {
+            id: 4,
+            name: 'Диагональный',
+            desc: 'Листья по диагонали слева-снизу направо-вверх',
+            badge: 'диагональ',
+            svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 390 C60 340 120 280 180 220 C220 180 260 140 290 100 C310 72 325 50 335 30" stroke-width="2.4"/>
+            <path d="M180 220 C155 232 130 242 110 255" stroke-width="1.7"/>
+            <path d="M180 220 C205 232 230 242 250 255" stroke-width="1.7"/>
+            <path d="M220 180 C198 190 178 198 160 210" stroke-width="1.5"/>
+            <path d="M220 180 C242 190 262 198 280 210" stroke-width="1.5"/>
+            <path d="M255 145 C238 153 220 160 208 170" stroke-width="1.3"/>
+            <path d="M255 145 C272 153 290 160 302 170" stroke-width="1.3"/>
+            <path d="M280 115 C268 122 255 128 248 138" stroke-width="1.1"/>
+            <path d="M280 115 C292 122 305 128 312 138" stroke-width="1.1"/>
+          </g>
+        </svg>`
+        }, {
+            id: 5,
+            name: 'Парящие листья',
+            desc: 'Листья разбросаны по всему полю',
+            badge: 'свободный',
+            svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Верхний левый -->
+            <path d="M30 80 C50 60 80 50 110 45 C130 42 145 42 155 45" stroke-width="1.8"/>
+            <path d="M80 55 C68 62 56 68 48 78" stroke-width="1.3"/>
+            <path d="M80 55 C92 62 104 68 112 78" stroke-width="1.3"/>
+            <!-- Правый верхний -->
+            <path d="M370 120 C350 100 320 90 290 85 C270 82 255 82 245 85" stroke-width="1.8"/>
+            <path d="M320 95 C308 102 296 108 288 118" stroke-width="1.3"/>
+            <path d="M320 95 C332 102 344 108 352 118" stroke-width="1.3"/>
+            <!-- Центральный -->
+            <path d="M200 200 C180 175 155 155 135 140 C122 130 112 122 105 118" stroke-width="2.0"/>
+            <path d="M155 160 C140 168 125 175 115 185" stroke-width="1.5"/>
+            <path d="M155 160 C170 168 185 175 195 185" stroke-width="1.5"/>
+            <!-- Нижний правый -->
+            <path d="M380 350 C360 330 330 320 300 315 C280 312 265 312 255 315" stroke-width="1.8"/>
+            <path d="M330 325 C318 332 306 338 298 348" stroke-width="1.3"/>
+            <path d="M330 325 C342 332 354 338 362 348" stroke-width="1.3"/>
+          </g>
+        </svg>`
+        }, {
+            id: 6,
+            name: 'Ботанический',
+            desc: 'Детальный, с множеством мелких листочков',
+            badge: 'детальный',
+            svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M380 390 C350 340 300 280 250 220 C210 170 180 125 165 90 C155 68 150 50 148 38" stroke-width="2.0"/>
+            <path d="M310 280 C290 288 270 295 255 305" stroke-width="1.5"/>
+            <path d="M310 280 C330 288 350 295 365 305" stroke-width="1.5"/>
+            <path d="M310 280 C295 285 280 290 268 298" stroke-width="0.9"/>
+            <path d="M310 280 C325 285 340 290 352 298" stroke-width="0.9"/>
+            <path d="M270 225 C252 232 235 238 222 248" stroke-width="1.4"/>
+            <path d="M270 225 C288 232 305 238 318 248" stroke-width="1.4"/>
+            <path d="M270 225 C258 230 245 235 235 242" stroke-width="0.8"/>
+            <path d="M270 225 C282 230 295 235 305 242" stroke-width="0.8"/>
+            <path d="M230 175 C215 182 200 188 190 198" stroke-width="1.2"/>
+            <path d="M230 175 C245 182 260 188 270 198" stroke-width="1.2"/>
+            <path d="M230 175 C220 180 210 185 202 192" stroke-width="0.8"/>
+            <path d="M230 175 C240 180 250 185 258 192" stroke-width="0.8"/>
+            <path d="M195 135 C183 141 172 147 165 157" stroke-width="1.0"/>
+            <path d="M195 135 C207 141 218 147 225 157" stroke-width="1.0"/>
+            <path d="M170 100 C160 106 152 112 148 120" stroke-width="0.9"/>
+            <path d="M170 100 C180 106 188 112 192 120" stroke-width="0.9"/>
+            <path d="M148 38 C142 42 138 46 136 52" stroke-width="0.7"/>
+            <path d="M148 38 C154 42 158 46 160 52" stroke-width="0.7"/>
+          </g>
+        </svg>`
+        }, {
+            id: 7,
+            name: 'Ветвистый',
+            desc: 'Папоротник с разветвлённым стеблем',
+            badge: 'ветвистый',
+            svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M380 380 C360 340 330 290 290 240 C260 200 230 160 210 130 C195 108 185 90 178 75" stroke-width="2.2"/>
+            <path d="M290 240 C270 250 250 260 235 270" stroke-width="1.5"/>
+            <path d="M290 240 C310 250 330 260 345 270" stroke-width="1.5"/>
+            <path d="M250 200 C232 208 215 215 202 225" stroke-width="1.4"/>
+            <path d="M250 200 C268 208 285 215 298 225" stroke-width="1.4"/>
+            <path d="M210 160 C192 168 175 175 162 185" stroke-width="1.2"/>
+            <path d="M210 160 C228 168 245 175 258 185" stroke-width="1.2"/>
+            <!-- Ветвь в сторону -->
+            <path d="M290 240 C305 225 320 210 340 200 C350 195 358 192 365 190" stroke-width="1.6"/>
+            <path d="M320 210 C308 218 296 225 288 235" stroke-width="1.2"/>
+            <path d="M320 210 C332 218 344 225 352 235" stroke-width="1.2"/>
+            <path d="M340 200 C330 205 320 210 312 218" stroke-width="1.0"/>
+            <path d="M340 200 C350 205 360 210 368 218" stroke-width="1.0"/>
+          </g>
+        </svg>`
+        }, {
+            id: 8,
+            name: 'Минимальный',
+            desc: 'Очень мало листьев, чистый минимализм',
+            badge: 'минимальный',
+            svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#e5e7e5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M380 390 C350 340 310 280 270 230 C240 190 215 155 200 130 C190 115 183 102 178 92" stroke-width="2.0"/>
+            <path d="M300 280 C285 290 270 300 260 310" stroke-width="1.4"/>
+            <path d="M300 280 C315 290 330 300 340 310" stroke-width="1.4"/>
+            <path d="M260 230 C248 238 235 245 228 255" stroke-width="1.2"/>
+            <path d="M260 230 C272 238 285 245 292 255" stroke-width="1.2"/>
+            <path d="M230 190 C220 196 212 202 208 210" stroke-width="1.0"/>
+            <path d="M230 190 C240 196 248 202 252 210" stroke-width="1.0"/>
+            <path d="M200 155 C192 160 186 165 183 172" stroke-width="0.8"/>
+            <path d="M200 155 C208 160 214 165 217 172" stroke-width="0.8"/>
+          </g>
+        </svg>`
+        }, {
+            id: 9,
+            name: 'Зеркальный',
+            desc: 'Два симметричных листа по краям',
+            badge: 'симметрия',
+            svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Левый лист -->
+            <path d="M30 380 C60 330 100 270 140 210 C170 165 190 125 200 95 C205 80 208 68 210 58" stroke-width="2.2"/>
+            <path d="M100 280 C80 290 60 300 45 312" stroke-width="1.6"/>
+            <path d="M100 280 C120 290 140 300 155 312" stroke-width="1.6"/>
+            <path d="M130 220 C112 228 95 235 82 245" stroke-width="1.4"/>
+            <path d="M130 220 C148 228 165 235 178 245" stroke-width="1.4"/>
+            <path d="M160 170 C145 178 130 185 120 195" stroke-width="1.2"/>
+            <path d="M160 170 C175 178 190 185 200 195" stroke-width="1.2"/>
+            <!-- Правый лист -->
+            <path d="M370 380 C340 330 300 270 260 210 C230 165 210 125 200 95 C195 80 192 68 190 58" stroke-width="2.2"/>
+            <path d="M300 280 C280 290 260 300 245 312" stroke-width="1.6"/>
+            <path d="M300 280 C320 290 340 300 355 312" stroke-width="1.6"/>
+            <path d="M270 220 C252 228 235 235 222 245" stroke-width="1.4"/>
+            <path d="M270 220 C288 228 305 235 318 245" stroke-width="1.4"/>
+            <path d="M240 170 C225 178 210 185 200 195" stroke-width="1.2"/>
+            <path d="M240 170 C255 178 270 185 280 195" stroke-width="1.2"/>
+          </g>
+        </svg>`
+        }, {
+            id: 10,
+            name: 'Угловой верхний',
+            desc: 'Листья из правого верхнего угла',
+            badge: 'верхний',
+            svg: `<svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g stroke="#d9d9d9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M380 10 C350 60 300 120 250 180 C210 230 180 270 160 305 C148 328 140 345 135 358" stroke-width="2.2"/>
+            <path d="M300 120 C280 110 260 100 245 88" stroke-width="1.6"/>
+            <path d="M300 120 C320 110 340 100 355 88" stroke-width="1.6"/>
+            <path d="M260 170 C242 162 225 155 212 145" stroke-width="1.4"/>
+            <path d="M260 170 C278 162 295 155 308 145" stroke-width="1.4"/>
+            <path d="M225 215 C210 208 195 202 185 192" stroke-width="1.2"/>
+            <path d="M225 215 C240 208 255 202 265 192" stroke-width="1.2"/>
+            <path d="M195 255 C183 248 172 242 165 232" stroke-width="1.0"/>
+            <path d="M195 255 C207 248 218 242 225 232" stroke-width="1.0"/>
+            <path d="M170 290 C160 284 152 278 148 270" stroke-width="0.9"/>
+            <path d="M170 290 C180 284 188 278 192 270" stroke-width="0.9"/>
+            <!-- Маленький лист -->
+            <path d="M360 60 C340 100 310 150 280 200 C260 235 245 260 235 280 C228 292 223 302 220 310" stroke-width="1.8"/>
+            <path d="M310 150 C295 142 280 135 270 125" stroke-width="1.3"/>
+            <path d="M310 150 C325 142 340 135 350 125" stroke-width="1.3"/>
+            <path d="M280 195 C268 188 255 182 248 172" stroke-width="1.1"/>
+            <path d="M280 195 C292 188 305 182 312 172" stroke-width="1.1"/>
+          </g>
+        </svg>`
+        }];
+
+        // ============================================================
+        // РЕНДЕРИНГ
+        // ============================================================
+
+        const grid = document.getElementById('grid');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalPreview = document.getElementById('modalPreview');
+        const modalCode = document.getElementById('modalCode');
+        const modalClose = document.getElementById('modalClose');
+        const copyBtn = document.getElementById('copyBtn');
+
+        ferns.forEach((f, index) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+            <div class="card-preview">${f.svg}</div>
+            <div class="card-info">
+              <div class="name">${f.name}</div>
+              <div class="desc">${f.desc}</div>
+              <span class="badge">#${f.badge}</span>
+            </div>
+          `;
+            card.addEventListener('click', () => openModal(f));
+            grid.appendChild(card);
+        });
+
+        // ============================================================
+        // МОДАЛЬНОЕ ОКНО
+        // ============================================================
+
+        function openModal(f) {
+            modalTitle.textContent = f.name;
+            modalPreview.innerHTML = f.svg;
+            modalCode.textContent = f.svg.trim();
+            modal.classList.add('open');
+            copyBtn.textContent = '📋 Скопировать';
+            copyBtn.className = 'copy-btn';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ============================================================
+        // КОПИРОВАНИЕ
+        // ============================================================
+
+        copyBtn.addEventListener('click', async () => {
+            const text = modalCode.textContent;
+            try {
+                await navigator.clipboard.writeText(text);
+                copyBtn.textContent = '✅ Скопировано!';
+                copyBtn.className = 'copy-btn copied';
+                setTimeout(() => {
+                    copyBtn.textContent = '📋 Скопировать';
+                    copyBtn.className = 'copy-btn';
+                }, 2000);
+            } catch (err) {
+                // fallback
+                const range = document.createRange();
+                range.selectNode(modalCode);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                copyBtn.textContent = '✅ Скопировано!';
+                copyBtn.className = 'copy-btn copied';
+                setTimeout(() => {
+                    copyBtn.textContent = '📋 Скопировать';
+                    copyBtn.className = 'copy-btn';
+                }, 2000);
+            }
+        });
+
+        // ============================================================
+        // БЛОКИРОВКА ЗУМА
+        // ============================================================
+
+        document.addEventListener('gesturestart', (e) => e.preventDefault());
+    </script>
+</body>
+</html>
